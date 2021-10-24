@@ -7,7 +7,7 @@ dotenv.config();
 
 export function main() {
   const app = express();
-  const port = process.env.APP_PORT || 3000;
+  const port = +process.env.APP_PORT || 3000;
 
   // Middlewares
   app.use(cors());
