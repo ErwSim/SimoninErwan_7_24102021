@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
+import { loggerMiddleware } from "./middlewares";
 
 dotenv.config();
 
@@ -13,6 +14,9 @@ export function main() {
   app.use(cors());
   app.use(express.json());
   app.use("/images", express.static(path.join(__dirname, "images")));
+
+  // Custom Middlewares
+  app.use(loggerMiddleware);
 
   // Routes
 
