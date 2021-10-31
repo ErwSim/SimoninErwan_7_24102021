@@ -17,8 +17,10 @@ export class AuthController {
     req: express.Request,
     res: express.Response
   ): Promise<express.Response> {
+    const userCount = await this.prisma.user.count();
     const body: User = req.body;
     body.password = bcrypt.hashSync(body.password, process.env.SALT_ROUNDS);
+    body.admin = userCount === 0 ? true : false; // The first user created shall be admin
 
     try {
       const user: User & { token?: string } = await this.prisma.user.create({
