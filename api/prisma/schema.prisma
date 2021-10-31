@@ -32,6 +32,8 @@ model Post {
 model User {
   id         Int            @id @default(autoincrement())
   email      String         @unique @db.VarChar(255)
+  password   String
+  resetToken String?
   firstname  String         @db.VarChar(255)
   lastname   String         @db.VarChar(255)
   createdAt  DateTime       @default(now()) @db.DateTime
