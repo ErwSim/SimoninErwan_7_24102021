@@ -12,6 +12,6 @@ export function adminMiddleware(
       throw new Error("permissionDenied");
     }
   } catch (e) {
-    return res.status(403).json({ e });
+    return res.status(403).json({ error: e.message });
   }
 }

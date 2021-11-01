@@ -61,6 +61,10 @@ export class CategoryController {
       const id = +req.params.id;
       const category = await this.prisma.category.findUnique({ where: { id } });
 
+      if (!category) {
+        return res.status(404).json({ error: "categoryNotFound" });
+      }
+
       return res.status(200).json(category);
     } catch (e) {
       const error = new ErrorHandlingHelper(e).prisma();
