@@ -2,7 +2,11 @@ import { User, PrismaClient, Prisma } from "@prisma/client";
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { ErrorHandlingHelper } from "src/helpers";
+import { ErrorHandlingHelper } from "@helpers";
+
+interface ReturnedUser extends User {
+  token?: string;
+}
 
 export class AuthController {
   prisma = new PrismaClient();
@@ -23,7 +27,7 @@ export class AuthController {
     body.admin = userCount === 0 ? true : false; // The first user created shall be admin
 
     try {
-      const user: User & { token?: string } = await this.prisma.user.create({
+      const user: ReturnedUser = await this.prisma.user.create({
         data: body,
       });
 

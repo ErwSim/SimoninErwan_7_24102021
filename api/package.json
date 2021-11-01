@@ -6,12 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "dev": "tsc-watch --OnSuccess \"node .\"",
+    "dev": "tsc && tsc-watch --OnSuccess \"node .\"",
     "start": "tcs && node .",
     "lint": "eslint . --ext .ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
+  },
+  "_moduleAliases": {
+    "@controllers": "dist/controllers/index.js",
+    "@routes": "dist/routes/index.js",
+    "@helpers": "dist/helpers/index.js",
+    "@middlewares": "dist/middlewares/index.js"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +30,8 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

@@ -7,11 +7,14 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": ".",
+    "baseUrl": "./src/",
     "paths": {
-      "*": ["node_modules/*"],
-      "src/*": ["./src/*"]
+      "*": ["../node_modules/*"],
+      "@controllers": ["controllers/index.ts"],
+      "@routes": ["routes/index.ts"],
+      "@helpers": ["helpers/index.ts"],
+      "@middlewares": ["middlewares/index.ts"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src"]
 }
