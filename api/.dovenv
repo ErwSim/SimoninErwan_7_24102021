@@ -1,0 +1,4 @@
+APP_PORT=3000
+DATABASE_URL="mysql://<username>:<password>@<host>:<port>/<database>?schema=public"
+JWT_SECRET=<mySecretCode>
+SALT_ROUNDS=12
