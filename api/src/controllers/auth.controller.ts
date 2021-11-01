@@ -3,8 +3,9 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ErrorHandlingHelper } from "@helpers";
+import { UserNotFoundError, UserWrongPasswordError } from "@errors";
 
-interface ReturnedUser extends User {
+interface IReturnedUser extends User {
   token?: string;
 }
 
@@ -23,11 +24,11 @@ export class AuthController {
   ): Promise<express.Response> {
     const userCount = await this.prisma.user.count();
     const body: User = req.body;
-    body.password = bcrypt.hashSync(body.password, process.env.SALT_ROUNDS);
+    body.password = bcrypt.hashSync(body.password, +process.env.SALT_ROUNDS);
     body.admin = userCount === 0 ? true : false; // The first user created shall be admin
 
     try {
-      const user: ReturnedUser = await this.prisma.user.create({
+      const user: IReturnedUser = await this.prisma.user.create({
         data: body,
       });
 
@@ -55,16 +56,16 @@ export class AuthController {
     const password: string = req.body.password;
 
     try {
-      const user: User & { token?: string } = await this.prisma.user.findUnique(
-        { where: { email } }
-      );
+      const user: IReturnedUser = await this.prisma.user.findUnique({
+        where: { email },
+      });
 
       if (!user) {
-        throw new Error("userNotFound");
+        throw new UserNotFoundError();
       }
 
       if (!bcrypt.compareSync(password, user.password)) {
-        throw new Error("wrongPassword");
+        throw new UserWrongPasswordError();
       }
 
       user.token = jwt.sign(user, process.env.JWT_SECRET);
@@ -79,12 +80,12 @@ export class AuthController {
       }
 
       // Custom errors
-      if (e instanceof Error) {
-        if (e.message === "userNotFound") {
-          return res.status(404).json({ error: e.message });
-        } else if (e.message === "wrongPassword") {
-          return res.status(401).json({ error: e.message });
-        }
+      if (e instanceof UserNotFoundError) {
+        return res.status(404).json({ error: e.message });
+      }
+
+      if (e instanceof UserWrongPasswordError) {
+        return res.status(401).json({ error: e.message });
       }
     }
   }

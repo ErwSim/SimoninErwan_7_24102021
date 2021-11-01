@@ -17,7 +17,8 @@
     "@controllers": "dist/controllers/index.js",
     "@routes": "dist/routes/index.js",
     "@helpers": "dist/helpers/index.js",
-    "@middlewares": "dist/middlewares/index.js"
+    "@middlewares": "dist/middlewares/index.js",
+    "@errors": "dist/errors/index.js"
   },
   "keywords": [],
   "author": "",

@@ -4,7 +4,7 @@ import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 import { loggerMiddleware } from "@middlewares";
-import { authRoute } from "@routes";
+import { authRoute, userRoute } from "@routes";
 
 dotenv.config();
 
@@ -21,7 +21,8 @@ export function main() {
   app.use(loggerMiddleware);
 
   // Routes
-  app.use(authRoute);
+  app.use("/auth", authRoute);
+  app.use("/users", userRoute);
 
   app.listen(port, () => {
     console.log(`Server started at http://localhost:${port}`);

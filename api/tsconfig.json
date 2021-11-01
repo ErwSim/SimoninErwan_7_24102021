@@ -13,7 +13,8 @@
       "@controllers": ["controllers/index.ts"],
       "@routes": ["routes/index.ts"],
       "@helpers": ["helpers/index.ts"],
-      "@middlewares": ["middlewares/index.ts"]
+      "@middlewares": ["middlewares/index.ts"],
+      "@errors": ["errors/index.ts"]
     }
   },
   "include": ["src"]
