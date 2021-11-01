@@ -12,13 +12,21 @@ interface IChangePassword {
 export class UserController {
   prisma = new PrismaClient();
 
+  /**
+   * Change user password
+   * @param req - Express request
+   * @param res - Express response
+   * @returns No content
+   */
   async changePassword(
     req: express.Request,
     res: express.Response
   ): Promise<express.Response> {
     try {
-      const userId = +req.query.id;
+      const userId = +req.params.id;
       const oldNew: IChangePassword = req.body;
+
+      console.log(userId, oldNew);
       const user = await this.prisma.user.findUnique({ where: { id: userId } });
 
       if (!user) {
@@ -38,6 +46,8 @@ export class UserController {
           ),
         },
       });
+
+      return res.status(204).send();
     } catch (e) {
       // Prisma errors
       if (e instanceof Prisma.PrismaClientKnownRequestError) {
