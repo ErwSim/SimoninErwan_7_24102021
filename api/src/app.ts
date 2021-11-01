@@ -3,8 +3,8 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
-import { loggerMiddleware } from "@middlewares";
-import { authRoute, userRoute } from "@routes";
+import { authMiddleware, loggerMiddleware } from "@middlewares";
+import { authRoute, categoryRoute, userRoute } from "@routes";
 
 dotenv.config();
 
@@ -23,6 +23,7 @@ export function main() {
   // Routes
   app.use("/auth", authRoute);
   app.use("/users", userRoute);
+  app.use("/categories", authMiddleware, categoryRoute);
 
   app.listen(port, () => {
     console.log(`Server started at http://localhost:${port}`);
