@@ -19,6 +19,9 @@ type UnwrapTuple<Tuple extends readonly unknown[]> = {
 export type Category = {
   id: number
   name: string
+  imageUrl: string | null
+  description: string | null
+  backgroundFallback: Buffer | null
 }
 
 /**
@@ -287,8 +290,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.3.0
-   * Query Engine version: 33838b0f78f1fe9052cf9a00e9761c9dc097a63c
+   * Prisma Client JS version: 3.4.1
+   * Query Engine version: 57771c0558568c7d08bd34c7248af5244ae16bd9
    */
   export type PrismaVersion = {
     client: string
@@ -990,16 +993,25 @@ export namespace Prisma {
   export type CategoryMinAggregateOutputType = {
     id: number | null
     name: string | null
+    imageUrl: string | null
+    description: string | null
+    backgroundFallback: Buffer | null
   }
 
   export type CategoryMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    imageUrl: string | null
+    description: string | null
+    backgroundFallback: Buffer | null
   }
 
   export type CategoryCountAggregateOutputType = {
     id: number
     name: number
+    imageUrl: number
+    description: number
+    backgroundFallback: number
     _all: number
   }
 
@@ -1015,16 +1027,25 @@ export namespace Prisma {
   export type CategoryMinAggregateInputType = {
     id?: true
     name?: true
+    imageUrl?: true
+    description?: true
+    backgroundFallback?: true
   }
 
   export type CategoryMaxAggregateInputType = {
     id?: true
     name?: true
+    imageUrl?: true
+    description?: true
+    backgroundFallback?: true
   }
 
   export type CategoryCountAggregateInputType = {
     id?: true
     name?: true
+    imageUrl?: true
+    description?: true
+    backgroundFallback?: true
     _all?: true
   }
 
@@ -1123,6 +1144,9 @@ export namespace Prisma {
   export type CategoryGroupByOutputType = {
     id: number
     name: string
+    imageUrl: string | null
+    description: string | null
+    backgroundFallback: Buffer | null
     _count: CategoryCountAggregateOutputType | null
     _avg: CategoryAvgAggregateOutputType | null
     _sum: CategorySumAggregateOutputType | null
@@ -1147,6 +1171,9 @@ export namespace Prisma {
   export type CategorySelect = {
     id?: boolean
     name?: boolean
+    imageUrl?: boolean
+    description?: boolean
+    backgroundFallback?: boolean
     Posts?: boolean | PostFindManyArgs
     _count?: boolean | CategoryCountOutputTypeArgs
   }
@@ -4613,7 +4640,10 @@ export namespace Prisma {
 
   export const CategoryScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    imageUrl: 'imageUrl',
+    description: 'description',
+    backgroundFallback: 'backgroundFallback'
   };
 
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -4676,12 +4706,18 @@ export namespace Prisma {
     NOT?: Enumerable<CategoryWhereInput>
     id?: IntFilter | number
     name?: StringFilter | string
+    imageUrl?: StringNullableFilter | string | null
+    description?: StringNullableFilter | string | null
+    backgroundFallback?: BytesNullableFilter | Buffer | null
     Posts?: PostListRelationFilter
   }
 
   export type CategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    imageUrl?: SortOrder
+    description?: SortOrder
+    backgroundFallback?: SortOrder
     Posts?: PostOrderByRelationAggregateInput
   }
 
@@ -4692,6 +4728,9 @@ export namespace Prisma {
   export type CategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    imageUrl?: SortOrder
+    description?: SortOrder
+    backgroundFallback?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
     _avg?: CategoryAvgOrderByAggregateInput
     _max?: CategoryMaxOrderByAggregateInput
@@ -4705,6 +4744,9 @@ export namespace Prisma {
     NOT?: Enumerable<CategoryScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
     name?: StringWithAggregatesFilter | string
+    imageUrl?: StringNullableWithAggregatesFilter | string | null
+    description?: StringNullableWithAggregatesFilter | string | null
+    backgroundFallback?: BytesNullableWithAggregatesFilter | Buffer | null
   }
 
   export type PostWhereInput = {
@@ -4889,38 +4931,59 @@ export namespace Prisma {
 
   export type CategoryCreateInput = {
     name: string
+    imageUrl?: string | null
+    description?: string | null
+    backgroundFallback?: Buffer | null
     Posts?: PostCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateInput = {
     id?: number
     name: string
+    imageUrl?: string | null
+    description?: string | null
+    backgroundFallback?: Buffer | null
     Posts?: PostUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     Posts?: PostUpdateManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     Posts?: PostUncheckedUpdateManyWithoutCategoryInput
   }
 
   export type CategoryCreateManyInput = {
     id?: number
     name: string
+    imageUrl?: string | null
+    description?: string | null
+    backgroundFallback?: Buffer | null
   }
 
   export type CategoryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
   export type CategoryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
   export type PostCreateInput = {
@@ -5156,6 +5219,25 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
+  export type StringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableFilter | string | null
+  }
+
+  export type BytesNullableFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableFilter | Buffer | null
+  }
+
   export type PostListRelationFilter = {
     every?: PostWhereInput
     some?: PostWhereInput
@@ -5169,6 +5251,9 @@ export namespace Prisma {
   export type CategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    imageUrl?: SortOrder
+    description?: SortOrder
+    backgroundFallback?: SortOrder
   }
 
   export type CategoryAvgOrderByAggregateInput = {
@@ -5178,11 +5263,17 @@ export namespace Prisma {
   export type CategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    imageUrl?: SortOrder
+    description?: SortOrder
+    backgroundFallback?: SortOrder
   }
 
   export type CategoryMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    imageUrl?: SortOrder
+    description?: SortOrder
+    backgroundFallback?: SortOrder
   }
 
   export type CategorySumOrderByAggregateInput = {
@@ -5220,6 +5311,31 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedStringFilter
     _max?: NestedStringFilter
+  }
+
+  export type StringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
+  }
+
+  export type BytesNullableWithAggregatesFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedBytesNullableFilter
+    _max?: NestedBytesNullableFilter
   }
 
   export type DateTimeFilter = {
@@ -5359,20 +5475,6 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter
   }
 
-  export type StringNullableFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
-    not?: NestedStringNullableFilter | string | null
-  }
-
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -5412,23 +5514,6 @@ export namespace Prisma {
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
-    not?: NestedStringNullableWithAggregatesFilter | string | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedStringNullableFilter
-    _max?: NestedStringNullableFilter
   }
 
   export type EnumVoteTypesFilter = {
@@ -5500,6 +5585,14 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableBytesFieldUpdateOperationsInput = {
+    set?: Buffer | null
   }
 
   export type PostUpdateManyWithoutCategoryInput = {
@@ -5710,10 +5803,6 @@ export namespace Prisma {
     connect?: Enumerable<UserPostVoteWhereUniqueInput>
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type PostUpdateManyWithoutUserInput = {
     create?: XOR<Enumerable<PostCreateWithoutUserInput>, Enumerable<PostUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<PostCreateOrConnectWithoutUserInput>
@@ -5827,6 +5916,25 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
+  export type NestedStringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableFilter | string | null
+  }
+
+  export type NestedBytesNullableFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableFilter | Buffer | null
+  }
+
   export type NestedIntWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -5871,6 +5979,42 @@ export namespace Prisma {
     _max?: NestedStringFilter
   }
 
+  export type NestedStringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
+  }
+
+  export type NestedIntNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntNullableFilter | number | null
+  }
+
+  export type NestedBytesNullableWithAggregatesFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedBytesNullableFilter
+    _max?: NestedBytesNullableFilter
+  }
+
   export type NestedDateTimeFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string>
@@ -5885,17 +6029,6 @@ export namespace Prisma {
   export type NestedBoolFilter = {
     equals?: boolean
     not?: NestedBoolFilter | boolean
-  }
-
-  export type NestedIntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
   }
 
   export type NestedDateTimeWithAggregatesFilter = {
@@ -5945,37 +6078,6 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: NestedFloatNullableFilter | number | null
-  }
-
-  export type NestedStringNullableFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
-    not?: NestedStringNullableFilter | string | null
-  }
-
-  export type NestedStringNullableWithAggregatesFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
-    not?: NestedStringNullableWithAggregatesFilter | string | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedStringNullableFilter
-    _max?: NestedStringNullableFilter
   }
 
   export type NestedEnumVoteTypesFilter = {
@@ -6088,11 +6190,17 @@ export namespace Prisma {
 
   export type CategoryCreateWithoutPostsInput = {
     name: string
+    imageUrl?: string | null
+    description?: string | null
+    backgroundFallback?: Buffer | null
   }
 
   export type CategoryUncheckedCreateWithoutPostsInput = {
     id?: number
     name: string
+    imageUrl?: string | null
+    description?: string | null
+    backgroundFallback?: Buffer | null
   }
 
   export type CategoryCreateOrConnectWithoutPostsInput = {
@@ -6218,11 +6326,17 @@ export namespace Prisma {
 
   export type CategoryUpdateWithoutPostsInput = {
     name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
   export type CategoryUncheckedUpdateWithoutPostsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
   export type PostUpsertWithWhereUniqueWithoutPostMessagesInput = {

@@ -9,9 +9,12 @@ datasource db {
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(100)
-  Posts Post[]
+  id                 Int     @id @default(autoincrement())
+  name               String  @db.VarChar(100)
+  imageUrl           String?
+  description        String?
+  backgroundFallback Bytes?  @db.VarBinary(3)
+  Posts              Post[]
 }
 
 model Post {

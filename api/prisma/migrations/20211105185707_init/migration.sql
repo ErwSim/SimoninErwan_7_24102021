@@ -2,6 +2,9 @@
 CREATE TABLE `Category` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
+    `imageUrl` VARCHAR(191) NULL,
+    `description` VARCHAR(191) NULL,
+    `backgroundFallback` VARBINARY(3) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

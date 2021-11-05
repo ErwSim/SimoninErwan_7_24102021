@@ -11,12 +11,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 3.3.0
- * Query Engine version: 33838b0f78f1fe9052cf9a00e9761c9dc097a63c
+ * Prisma Client JS version: 3.4.1
+ * Query Engine version: 57771c0558568c7d08bd34c7248af5244ae16bd9
  */
 Prisma.prismaVersion = {
-  client: "3.3.0",
-  engine: "33838b0f78f1fe9052cf9a00e9761c9dc097a63c"
+  client: "3.4.1",
+  engine: "57771c0558568c7d08bd34c7248af5244ae16bd9"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -78,7 +78,10 @@ function makeEnum(x) { return x; }
 
 exports.Prisma.CategoryScalarFieldEnum = makeEnum({
   id: 'id',
-  name: 'name'
+  name: 'name',
+  imageUrl: 'imageUrl',
+  description: 'description',
+  backgroundFallback: 'backgroundFallback'
 });
 
 exports.Prisma.PostScalarFieldEnum = makeEnum({
