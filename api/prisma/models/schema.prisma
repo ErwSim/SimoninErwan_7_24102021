@@ -13,7 +13,7 @@ model Category {
   name               String  @db.VarChar(100)
   imageUrl           String?
   description        String?
-  backgroundFallback Bytes?  @db.VarBinary(3)
+  backgroundFallback Bytes?  @default("0xffffff") @db.VarBinary(3)
   Posts              Post[]
 }
 
