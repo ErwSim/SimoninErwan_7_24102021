@@ -13,7 +13,7 @@ model Category {
   name               String  @db.VarChar(100)
   imageUrl           String?
   description        String?
-  backgroundFallback Bytes  @default("0xffffff") @db.VarBinary(3)
+  backgroundFallback Bytes   @default("0xffffff") @db.VarBinary(3)
   Posts              Post[]
 }
 
@@ -31,6 +31,8 @@ model Post {
   messageId    Int?
   postMessages Post?          @relation("postMessages", fields: [messageId], references: [id])
   usersVotes   UserPostVote[]
+
+  @@index([createdAt])
 }
 
 model User {
@@ -60,4 +62,5 @@ model UserPostVote {
   createdAt DateTime  @default(now())
 
   @@id([postId, userId])
+  @@index([type])
 }
