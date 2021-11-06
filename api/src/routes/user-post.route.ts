@@ -1,5 +1,4 @@
 import { PostController } from "@controllers";
-import { adminMiddleware } from "@middlewares";
 import express from "express";
 
 const route = express.Router();
