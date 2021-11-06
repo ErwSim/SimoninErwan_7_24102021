@@ -3,7 +3,12 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
-import { authMiddleware, loggerMiddleware, ownMiddleware } from "@middlewares";
+import {
+  authMiddleware,
+  filterMiddleware,
+  loggerMiddleware,
+  ownMiddleware,
+} from "@middlewares";
 import {
   authRoute,
   categoryRoute,
@@ -26,6 +31,7 @@ export function main() {
 
   // Custom Middlewares
   app.use(loggerMiddleware);
+  app.use(filterMiddleware);
 
   // Routes
   app.use("/auth", authRoute);
