@@ -18,6 +18,7 @@ export class PostController {
     try {
       const body: Post = req.body;
 
+      // Used when querying own post
       if (+req.params.userId) {
         body.userId = +req.params.userId;
       }
@@ -43,6 +44,7 @@ export class PostController {
   ): Promise<express.Response> {
     try {
       let filter = null;
+      // Used when querying own post
       if (+req.params.userId) {
         filter = { where: { userId: +req.params.userId } };
       }
@@ -69,6 +71,7 @@ export class PostController {
     try {
       const id = +req.params.id;
       let filter: { where: Partial<Post> } = { where: { id } };
+      // Used when querying own post
       if (+req.params.userId) {
         filter.where.userId = +req.params.userId;
       }
@@ -99,6 +102,7 @@ export class PostController {
       const id = +req.params.id;
       const body: Partial<Post> = req.body;
       let filter: { where: Partial<Post> } = { where: { id } };
+      // Used when querying own post
       if (+req.params.userId) {
         filter.where.userId = +req.params.userId;
       }
@@ -127,6 +131,7 @@ export class PostController {
     try {
       const id = +req.params.id;
       let filter: { where: Partial<Post> } = { where: { id } };
+      // Used when querying own post
       if (+req.params.userId) {
         filter.where.userId = +req.params.userId;
       }
