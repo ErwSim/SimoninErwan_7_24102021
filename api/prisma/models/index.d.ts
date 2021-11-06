@@ -21,7 +21,7 @@ export type Category = {
   name: string
   imageUrl: string | null
   description: string | null
-  backgroundFallback: Buffer | null
+  backgroundFallback: Buffer
 }
 
 /**
@@ -1146,7 +1146,7 @@ export namespace Prisma {
     name: string
     imageUrl: string | null
     description: string | null
-    backgroundFallback: Buffer | null
+    backgroundFallback: Buffer
     _count: CategoryCountAggregateOutputType | null
     _avg: CategoryAvgAggregateOutputType | null
     _sum: CategorySumAggregateOutputType | null
@@ -4708,7 +4708,7 @@ export namespace Prisma {
     name?: StringFilter | string
     imageUrl?: StringNullableFilter | string | null
     description?: StringNullableFilter | string | null
-    backgroundFallback?: BytesNullableFilter | Buffer | null
+    backgroundFallback?: BytesFilter | Buffer
     Posts?: PostListRelationFilter
   }
 
@@ -4746,7 +4746,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter | string
     imageUrl?: StringNullableWithAggregatesFilter | string | null
     description?: StringNullableWithAggregatesFilter | string | null
-    backgroundFallback?: BytesNullableWithAggregatesFilter | Buffer | null
+    backgroundFallback?: BytesWithAggregatesFilter | Buffer
   }
 
   export type PostWhereInput = {
@@ -4933,7 +4933,7 @@ export namespace Prisma {
     name: string
     imageUrl?: string | null
     description?: string | null
-    backgroundFallback?: Buffer | null
+    backgroundFallback?: Buffer
     Posts?: PostCreateNestedManyWithoutCategoryInput
   }
 
@@ -4942,7 +4942,7 @@ export namespace Prisma {
     name: string
     imageUrl?: string | null
     description?: string | null
-    backgroundFallback?: Buffer | null
+    backgroundFallback?: Buffer
     Posts?: PostUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -4950,7 +4950,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    backgroundFallback?: BytesFieldUpdateOperationsInput | Buffer
     Posts?: PostUpdateManyWithoutCategoryInput
   }
 
@@ -4959,7 +4959,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    backgroundFallback?: BytesFieldUpdateOperationsInput | Buffer
     Posts?: PostUncheckedUpdateManyWithoutCategoryInput
   }
 
@@ -4968,14 +4968,14 @@ export namespace Prisma {
     name: string
     imageUrl?: string | null
     description?: string | null
-    backgroundFallback?: Buffer | null
+    backgroundFallback?: Buffer
   }
 
   export type CategoryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    backgroundFallback?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type CategoryUncheckedUpdateManyInput = {
@@ -4983,7 +4983,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    backgroundFallback?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type PostCreateInput = {
@@ -5233,9 +5233,9 @@ export namespace Prisma {
     not?: NestedStringNullableFilter | string | null
   }
 
-  export type BytesNullableFilter = {
-    equals?: Buffer | null
-    not?: NestedBytesNullableFilter | Buffer | null
+  export type BytesFilter = {
+    equals?: Buffer
+    not?: NestedBytesFilter | Buffer
   }
 
   export type PostListRelationFilter = {
@@ -5330,12 +5330,12 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter
   }
 
-  export type BytesNullableWithAggregatesFilter = {
-    equals?: Buffer | null
-    not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedBytesNullableFilter
-    _max?: NestedBytesNullableFilter
+  export type BytesWithAggregatesFilter = {
+    equals?: Buffer
+    not?: NestedBytesWithAggregatesFilter | Buffer
+    _count?: NestedIntFilter
+    _min?: NestedBytesFilter
+    _max?: NestedBytesFilter
   }
 
   export type DateTimeFilter = {
@@ -5591,8 +5591,8 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type NullableBytesFieldUpdateOperationsInput = {
-    set?: Buffer | null
+  export type BytesFieldUpdateOperationsInput = {
+    set?: Buffer
   }
 
   export type PostUpdateManyWithoutCategoryInput = {
@@ -5930,9 +5930,9 @@ export namespace Prisma {
     not?: NestedStringNullableFilter | string | null
   }
 
-  export type NestedBytesNullableFilter = {
-    equals?: Buffer | null
-    not?: NestedBytesNullableFilter | Buffer | null
+  export type NestedBytesFilter = {
+    equals?: Buffer
+    not?: NestedBytesFilter | Buffer
   }
 
   export type NestedIntWithAggregatesFilter = {
@@ -6007,12 +6007,12 @@ export namespace Prisma {
     not?: NestedIntNullableFilter | number | null
   }
 
-  export type NestedBytesNullableWithAggregatesFilter = {
-    equals?: Buffer | null
-    not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedBytesNullableFilter
-    _max?: NestedBytesNullableFilter
+  export type NestedBytesWithAggregatesFilter = {
+    equals?: Buffer
+    not?: NestedBytesWithAggregatesFilter | Buffer
+    _count?: NestedIntFilter
+    _min?: NestedBytesFilter
+    _max?: NestedBytesFilter
   }
 
   export type NestedDateTimeFilter = {
@@ -6192,7 +6192,7 @@ export namespace Prisma {
     name: string
     imageUrl?: string | null
     description?: string | null
-    backgroundFallback?: Buffer | null
+    backgroundFallback?: Buffer
   }
 
   export type CategoryUncheckedCreateWithoutPostsInput = {
@@ -6200,7 +6200,7 @@ export namespace Prisma {
     name: string
     imageUrl?: string | null
     description?: string | null
-    backgroundFallback?: Buffer | null
+    backgroundFallback?: Buffer
   }
 
   export type CategoryCreateOrConnectWithoutPostsInput = {
@@ -6328,7 +6328,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    backgroundFallback?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type CategoryUncheckedUpdateWithoutPostsInput = {
@@ -6336,7 +6336,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    backgroundFallback?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    backgroundFallback?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type PostUpsertWithWhereUniqueWithoutPostMessagesInput = {
