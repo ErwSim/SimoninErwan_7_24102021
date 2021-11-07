@@ -43,10 +43,10 @@ export class PostController {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      let filter = null;
+      const filter = req.filter;
       // Used when querying own post
       if (+req.params.userId) {
-        filter = { where: { userId: +req.params.userId } };
+        filter.where.userId = +req.params.userId;
       }
 
       const posts = await this.prisma.post.findMany(filter);
@@ -70,7 +70,8 @@ export class PostController {
   ): Promise<express.Response> {
     try {
       const id = +req.params.id;
-      let filter: { where: Partial<Post> } = { where: { id } };
+      const filter = req.filter;
+      filter.where.id = id;
       // Used when querying own post
       if (+req.params.userId) {
         filter.where.userId = +req.params.userId;
@@ -101,7 +102,9 @@ export class PostController {
     try {
       const id = +req.params.id;
       const body: Partial<Post> = req.body;
-      let filter: { where: Partial<Post> } = { where: { id } };
+
+      const filter = req.filter;
+      filter.where.id = id;
       // Used when querying own post
       if (+req.params.userId) {
         filter.where.userId = +req.params.userId;

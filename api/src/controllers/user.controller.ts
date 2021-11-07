@@ -26,7 +26,6 @@ export class UserController {
       const userId = +req.params.id;
       const oldNew: IChangePassword = req.body;
 
-      console.log(userId, oldNew);
       const user = await this.prisma.user.findUnique({ where: { id: userId } });
 
       if (!user) {
