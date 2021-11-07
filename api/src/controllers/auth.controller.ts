@@ -32,8 +32,9 @@ export class AuthController {
         data: body,
       });
 
-      user.token = jwt.sign(user, process.env.JWT_SECRET);
       delete user.password;
+      delete user.resetToken;
+      user.token = jwt.sign(user, process.env.JWT_SECRET);
 
       return res.status(201).json({ user });
     } catch (e) {
@@ -68,8 +69,9 @@ export class AuthController {
         throw new UserWrongPasswordError();
       }
 
-      user.token = jwt.sign(user, process.env.JWT_SECRET);
       delete user.password;
+      delete user.resetToken;
+      user.token = jwt.sign(user, process.env.JWT_SECRET);
 
       return res.status(200).json(user);
     } catch (e) {
