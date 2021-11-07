@@ -17,7 +17,7 @@ export class ImageController {
   ): Promise<express.Response> {
     try {
       const body = {
-        url: req.file.path,
+        uri: req.file.path,
         description: req.body.description,
       };
       const image = await this.prisma.image.create({ data: body });

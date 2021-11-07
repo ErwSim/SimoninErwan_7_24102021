@@ -8,17 +8,15 @@ datasource db {
 }
 
 model Image {
-  id          Int       @id @default(autoincrement())
-  url         String
+  id          Int     @id @default(autoincrement())
+  uri         String
   description String?
-  Category    Category?
 }
 
 model Category {
   id                 Int     @id @default(autoincrement())
   name               String  @db.VarChar(100)
-  imageId            Int?    @unique
-  Image              Image?  @relation(fields: [imageId], references: [id])
+  imageUri           String
   description        String?
   backgroundFallback Bytes   @default(dbgenerated("(0xffffff)")) @db.VarBinary(3)
   Posts              Post[]
