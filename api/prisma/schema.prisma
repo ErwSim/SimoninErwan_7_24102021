@@ -24,15 +24,15 @@ model Category {
 
 model Post {
   id           Int            @id @default(autoincrement())
-  title        String         @db.VarChar(255)
+  title        String?        @db.VarChar(255)
   createdAt    DateTime       @default(now()) @db.DateTime(0)
   content      String         @db.LongText
   spoiler      Boolean        @default(false)
   userId       Int
   categoryId   Int
-  messageId    Int?
+  postId       Int?
   Category     Category       @relation(fields: [categoryId], references: [id])
-  postMessages Post?          @relation("postMessages", fields: [messageId], references: [id])
+  postMessages Post?          @relation("postMessages", fields: [postId], references: [id])
   User         User           @relation(fields: [userId], references: [id])
   messages     Post[]         @relation("postMessages")
   usersVotes   UserPostVote[]

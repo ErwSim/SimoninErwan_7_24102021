@@ -23,6 +23,11 @@ export class PostController {
         body.userId = +req.params.userId;
       }
 
+      // The title cannot be empty if the message is a top level post
+      if (!body.title && !body.postId) {
+        return res.status(400).json({ e: "postTitleCannotBeEmpty" });
+      }
+
       const post = await this.prisma.post.create({ data: body });
 
       return res.status(201).json(post);
