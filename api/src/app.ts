@@ -12,6 +12,7 @@ import {
 import {
   authRoute,
   categoryRoute,
+  imageRoute,
   postRoute,
   userPostRoute,
   userPostVoteRoute,
@@ -40,6 +41,7 @@ export function main() {
   app.use("/categories", authMiddleware, categoryRoute);
   app.use("/posts", authMiddleware, postRoute);
   app.use("/votes", authMiddleware, ownMiddleware, userPostVoteRoute);
+  app.use("/images", imageRoute);
 
   app.listen(port, () => {
     console.log(`Server started at http://localhost:${port}`);

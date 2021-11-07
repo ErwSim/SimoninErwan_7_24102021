@@ -4,3 +4,4 @@ export * from "./category.route";
 export * from "./post.route";
 export * from "./user-post.route";
 export * from "./user-post-vote.route";
+export * from "./image.route";

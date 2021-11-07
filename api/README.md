@@ -37,8 +37,11 @@ You can copy this file to .env and edit as you wish
 
 The database migration has two steps
 
-1.  `prisma migrate dev`
-2.  `prisma db seed`
+1.  `npx prisma generate`
+2.  `npx prisma migrate dev --name=init`
+3.  `npx prisma db seed`
+
+All those three commands can be run in once with `npm run dbInit`
 
 ### Start server
 

@@ -1,5 +1,5 @@
 import express from "express";
-import { Category, Prisma, PrismaClient } from ".prisma/client";
+import { Category, PrismaClient } from ".prisma/client";
 import { ErrorHandlingHelper } from "@helpers";
 
 export class CategoryController {
