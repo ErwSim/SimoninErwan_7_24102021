@@ -71,6 +71,12 @@ export class ErrorHandlingHelper {
       }
 
       return { statusCode, error };
+    } else {
+      console.error(this.e);
+      return {
+        statusCode: 500,
+        error: "unknownError",
+      };
     }
   }
 }

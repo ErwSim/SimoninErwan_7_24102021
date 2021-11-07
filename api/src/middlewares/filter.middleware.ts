@@ -5,11 +5,13 @@ export function filterMiddleware(
   res: express.Response,
   next: express.NextFunction
 ) {
-  const { select, where, include } = req.query.filter as any;
-  req.filter = {
-    select,
-    where,
-    include,
-  };
+  if (req.query.filter) {
+    const { select, where, include } = req.query.filter as any;
+    req.filter = {
+      select,
+      where,
+      include,
+    };
+  }
   next();
 }
