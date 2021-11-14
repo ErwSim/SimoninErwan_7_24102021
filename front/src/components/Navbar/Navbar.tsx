@@ -19,9 +19,9 @@ export function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Box sx={{ flexGrow: 1 }}>
+          <MuiLink component={Link} to="/" sx={{ flexGrow: 1 }}>
             <Logo width="200"></Logo>
-          </Box>
+          </MuiLink>
 
           {smBp ? (
             <React.Fragment>
