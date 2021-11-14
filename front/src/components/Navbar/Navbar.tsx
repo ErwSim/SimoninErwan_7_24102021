@@ -6,10 +6,12 @@ import {
   Link as MuiLink,
   useMediaQuery,
   useTheme,
+  Typography,
 } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../../images/logo-white.svg";
+import "./Navbar.scss";
 
 export function Navbar() {
   const theme = useTheme();
@@ -25,23 +27,36 @@ export function Navbar() {
 
           {smBp ? (
             <React.Fragment>
-              <MuiLink
-                component={Link}
-                to="/signup"
-                underline="none"
+              <Typography
+                variant="body1"
+                component="div"
                 color="inherit"
-                sx={{ mr: 3 }}
+                sx={{
+                  "& a": {
+                    m: 2,
+                    color: "primary.contrastText",
+                    textDecoration: "none",
+                    fontWeight: 800,
+                  },
+                }}
               >
-                <PersonAdd /> Inscription
-              </MuiLink>
-              <MuiLink
-                component={Link}
-                to="/login"
-                underline="none"
-                color="inherit"
-              >
-                <Person /> Connexion
-              </MuiLink>
+                <NavLink
+                  to="/signup"
+                  className={({ isActive }) =>
+                    isActive ? "active" : "notActive"
+                  }
+                >
+                  <PersonAdd /> Inscription
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? "active" : "notActive"
+                  }
+                >
+                  <Person /> Connexion
+                </NavLink>
+              </Typography>
             </React.Fragment>
           ) : (
             ""

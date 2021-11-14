@@ -1,29 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { App } from "./components/App/App";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./Theme";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { getRoutes } from "./routes";
-import { Navbar } from "./components/Navbar/Navbar";
-import { NotFound } from "./components/NotFound/NotFound";
-import { BottomNavbar } from "./components/BottomNavbar/BottomNavbar";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          {getRoutes().map((route, index) => {
-            return <Route {...route} key={index}></Route>;
-          })}
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-        <BottomNavbar></BottomNavbar>
-      </BrowserRouter>
-    </ThemeProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
