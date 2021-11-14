@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getRoutes } from "./routes";
-import { Navbar } from "./components/navbar/Navbar";
-import { NotFound } from "./components/not-found/NotFound";
+import { Navbar } from "./components/Navbar/Navbar";
+import { NotFound } from "./components/NotFound/NotFound";
 
 ReactDOM.render(
   <React.StrictMode>

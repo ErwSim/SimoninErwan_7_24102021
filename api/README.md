@@ -76,9 +76,7 @@ The database migration has two steps
 You can start the development server by running `npm run start`
 It will compil to dist folder and start the server
 
-## Create first user
+## Create administrator
 
-The first user will automatically be created as admin. All subsequent users will be standard users.
-The first user can be created with given frontend or directly with API call and doesn't require any permission.
-
-Due to this behaviour, be aware that none else than you create the first user or he won't be administrator.
+To create the first user, which will be administrator, use `npm run createAdmin`
+Project must be built in before

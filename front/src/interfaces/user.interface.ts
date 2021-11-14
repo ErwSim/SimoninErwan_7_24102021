@@ -8,5 +8,6 @@ export interface IUser {
   lastname: string;
   admin: boolean;
   createdAt: Date;
+  token: string;
   posts?: IPost[];
 }
