@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getRoutes } from "./routes";
 import { Navbar } from "./components/Navbar/Navbar";
 import { NotFound } from "./components/NotFound/NotFound";
+import { BottomNavbar } from "./components/BottomNavbar/BottomNavbar";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.render(
           })}
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
+        <BottomNavbar></BottomNavbar>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

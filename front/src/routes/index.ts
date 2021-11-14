@@ -1,6 +1,11 @@
+import { Login } from "../components/Login/Login";
+import { Signup } from "../components/Signup/Signup";
 import { IRoute } from "../interfaces";
 
-const routes: IRoute[] = [];
+const routes: IRoute[] = [
+  { name: "Login", path: "/login", element: Login() },
+  { name: "Signup", path: "/signup", element: Signup() },
+];
 
 const compile = (parentRoute: IRoute, subRoutes: IRoute[]): IRoute[] => {
   return subRoutes.flatMap((subRoute) => {
