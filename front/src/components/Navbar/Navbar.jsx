@@ -1,4 +1,4 @@
-import { Login, Logout, PersonAdd } from "@mui/icons-material";
+import { AccountCircle, Login, Logout, PersonAdd } from "@mui/icons-material";
 import {
   AppBar,
   Toolbar,
@@ -43,6 +43,15 @@ export default function Navbar() {
             >
               {currentUser ? (
                 <>
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "notActive"
+                    }
+                  >
+                    <AccountCircle />
+                    {currentUser.firstname}
+                  </NavLink>
                   <NavLink
                     to="/logout"
                     className={({ isActive }) =>

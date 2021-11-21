@@ -1,11 +1,12 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import { UserContext, MessageContext } from "../../contextes";
 import useInput from "../../hooks/useInput";
 import { AuthService } from "../../services";
 import { Navigate } from "react-router-dom";
+import { PageTitle } from "../PageTitle/PageTitle";
 
-export default function Login() {
+export default function Login(props) {
   const email = useInput("");
   const password = useInput("");
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -57,9 +58,7 @@ export default function Login() {
 
   return !currentUser ? (
     <>
-      <Typography variant="h2" component="h1" sx={{ textAlign: "center" }}>
-        Connexion
-      </Typography>
+      <PageTitle title="Connexion" />
       <Grid
         container
         direction="column"
@@ -95,7 +94,7 @@ export default function Login() {
     </>
   ) : (
     <>
-      <Navigate to="/" replace={true} />
+      <Navigate to={props.from ?? "/"} replace={true} />
     </>
   );
 }

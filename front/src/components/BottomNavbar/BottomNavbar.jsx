@@ -1,4 +1,4 @@
-import { Login, Logout, PersonAdd } from "@mui/icons-material";
+import { AccountCircle, Login, Logout, PersonAdd } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -38,11 +38,18 @@ export default function BottomNavbar() {
       ) : (
         <BottomNavigation showLabels value={value} onChange={handleChange}>
           <BottomNavigationAction
+            label={currentUser.firstname}
+            icon={<AccountCircle />}
+            value="/profile"
+            component={Link}
+            to="/profile"
+          />
+          <BottomNavigationAction
             label="Déconnexion"
             icon={<Logout />}
             value="/logout"
             component={Link}
-            to="logout"
+            to="/logout"
           />
         </BottomNavigation>
       )}
