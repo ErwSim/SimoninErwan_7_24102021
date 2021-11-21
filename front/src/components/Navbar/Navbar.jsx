@@ -8,14 +8,16 @@ import {
   useTheme,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { UserContext } from "../../contextes/user.context";
 import { ReactComponent as Logo } from "../../images/logo-white.svg";
 import "./Navbar.scss";
 
 export default function Navbar() {
   const theme = useTheme();
   const smBp = useMediaQuery(theme.breakpoints.up("sm"));
+  const { currentUser } = useContext(UserContext);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -39,22 +41,37 @@ export default function Navbar() {
                 },
               }}
             >
-              <NavLink
-                to="/signup"
-                className={({ isActive }) =>
-                  isActive ? "active" : "notActive"
-                }
-              >
-                <PersonAdd /> Inscription
-              </NavLink>
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? "active" : "notActive"
-                }
-              >
-                <Person /> Connexion
-              </NavLink>
+              {currentUser ? (
+                <>
+                  <NavLink
+                    to="/logout"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "notActive"
+                    }
+                  >
+                    Déconnexion
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    to="/signup"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "notActive"
+                    }
+                  >
+                    <PersonAdd /> Inscription
+                  </NavLink>
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "notActive"
+                    }
+                  >
+                    <Person /> Connexion
+                  </NavLink>
+                </>
+              )}
             </Typography>
           ) : (
             ""

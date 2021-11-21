@@ -1,18 +1,24 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../contextes/user.context";
 import useInput from "../../hooks/useInput";
+import { AuthService } from "../../services";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const email = useInput("");
   const password = useInput("");
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const authService = new AuthService();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(email.value, password.value);
+
+    setCurrentUser(authService.login(email.value, password.value));
   };
 
-  return (
-    <React.Fragment>
+  return !currentUser ? (
+    <>
       <Typography variant="h2" component="h1" sx={{ textAlign: "center" }}>
         Connexion
       </Typography>
@@ -49,6 +55,8 @@ export default function Login() {
           Connexion
         </Button>
       </Grid>
-    </React.Fragment>
+    </>
+  ) : (
+    <Navigate to="/" replace={true} />
   );
 }
