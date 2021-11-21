@@ -19,7 +19,6 @@ import { MessageContext } from "../../contextes";
 export default function App() {
   const muiTheme = useTheme();
   const smBp = useMediaQuery(muiTheme.breakpoints.down("sm"));
-  const elements = useRoutes(routes);
   const authService = new AuthService();
 
   const [currentUser, setCurrentUser] = useState(authService.getStoredUser());
@@ -27,6 +26,8 @@ export default function App() {
     () => ({ currentUser, setCurrentUser }),
     [currentUser]
   );
+  const isAuthenticated = currentUser !== null;
+  const elements = useRoutes(routes(isAuthenticated));
 
   const [message, setMessage] = useState(false);
   const messageContextValue = useMemo(

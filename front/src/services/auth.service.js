@@ -1,18 +1,22 @@
-import axios from "axios";
+import { GlobalService } from ".";
 
-export class AuthService {
-  api = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}auth/`,
-  });
-
+export class AuthService extends GlobalService {
   currentUser;
 
-  async login(email, password) {
-    const response = await this.api.post("signin", { email, password });
-    this.storeUser(response.data);
-    this.currentUser = response.data;
+  constructor() {
+    super("auth/");
+  }
 
-    return response.data;
+  async login(email, password) {
+    try {
+      const response = await this.api.post("signin", { email, password });
+      this.storeUser(response.data);
+      this.currentUser = response.data;
+
+      return response;
+    } catch (e) {
+      throw e;
+    }
   }
 
   logout() {

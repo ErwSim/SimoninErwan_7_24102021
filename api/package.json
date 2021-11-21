@@ -8,7 +8,7 @@
     "build": "tsc",
     "dbInit": "npx prisma generate && npx prisma migrate dev --name=init && npx prisma db seed",
     "dev": "tsc && tsc-watch --OnSuccess \"node .\"",
-    "start": "tss && node .",
+    "start": "tsc && node .",
     "lint": "eslint . --ext .ts",
     "createAdmin": "node ./dist/fixtures/create-admin.fixture.js"
   },

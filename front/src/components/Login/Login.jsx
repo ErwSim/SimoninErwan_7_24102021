@@ -15,12 +15,44 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setCurrentUser(authService.login(email.value, password.value));
-    setMessage({
-      type: "success",
-      message: "Connexion réussie",
-      time: 5000,
-    });
+    (async function login() {
+      try {
+        const user = await authService.login(email.value, password.value);
+        setCurrentUser(user);
+
+        if (user) {
+          setMessage({
+            type: "success",
+            message: "Connexion réussie",
+            time: 5000,
+          });
+        }
+      } catch (e) {
+        switch (e.response.status) {
+          case 404:
+            setMessage({
+              type: "error",
+              message: "Connexion échouée : Nom d'utilisateur incorrect",
+              time: 10000,
+            });
+            break;
+          case 401:
+            setMessage({
+              type: "error",
+              message: "Connexion échouée : Mot de passe incorrect",
+              time: 10000,
+            });
+            break;
+          default:
+            setMessage({
+              type: "error",
+              message: "Connexion échouée : Erreur inconnue",
+              time: 5000,
+            });
+            break;
+        }
+      }
+    })();
   };
 
   return !currentUser ? (
@@ -36,11 +68,10 @@ export default function Login() {
         component="form"
         onSubmit={handleSubmit}
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "50ch" },
-          "& .MuiButton-root": { m: 1, width: "56ch" },
+          "& .MuiTextField-root": { m: 1, width: "20em" },
+          "& .MuiButton-root": { m: 1, width: "23em" },
         }}
         noValidate
-        autoComplete="off"
       >
         <TextField
           id="email"

@@ -1,4 +1,4 @@
-import { Person, PersonAdd } from "@mui/icons-material";
+import { Login, Logout, PersonAdd } from "@mui/icons-material";
 import {
   AppBar,
   Toolbar,
@@ -49,7 +49,7 @@ export default function Navbar() {
                       isActive ? "active" : "notActive"
                     }
                   >
-                    Déconnexion
+                    <Logout /> Déconnexion
                   </NavLink>
                 </>
               ) : (
@@ -68,7 +68,7 @@ export default function Navbar() {
                       isActive ? "active" : "notActive"
                     }
                   >
-                    <Person /> Connexion
+                    <Login /> Connexion
                   </NavLink>
                 </>
               )}
