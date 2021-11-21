@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../contextes/user.context";
 import { AuthService } from "../../services";
-import { PageTitle } from "../PageTitle/PageTitle";
+import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 
 export default function Logout() {
   const { setCurrentUser } = useContext(UserContext);
@@ -16,7 +16,7 @@ export default function Logout() {
 
   return (
     <>
-      <PageTitle title="Déconnexion" />
+      <PageTitleHelper title="Déconnexion" />
       <Typography variant="body">Déconnexion réussie</Typography>
     </>
   );

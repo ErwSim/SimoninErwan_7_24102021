@@ -2,25 +2,32 @@ import Signup from "../components/Signup/Signup";
 import Login from "../components/Login/Login";
 import NotFound from "../components/NotFound/NotFound";
 import Logout from "../components/Logout/Logout";
-import { Home } from "../components/Home/Home";
-import { Profile } from "../components/Profile/Profile";
+import Home from "../components/Home/Home";
+import Profile from "../components/Profile/Profile";
+import UserContextHelper from "../components/helper-components/UserContextHelper/UserContextHelper";
 
-function routeAuth(isAuthenticated, component) {
-  return isAuthenticated ? (
-    component
-  ) : (
-    <Login from={window.location.pathname} />
-  );
-}
+const LoginFrom = () => <Login from={window.location.pathname} />;
 
 export const routes = (isAuthenticated) => [
   {
     path: "/",
-    element: routeAuth(isAuthenticated, <Home />),
+    element: isAuthenticated ? (
+      <UserContextHelper>
+        <Home />
+      </UserContextHelper>
+    ) : (
+      <LoginFrom />
+    ),
   },
   {
     path: "/profile",
-    element: routeAuth(isAuthenticated, <Profile />),
+    element: isAuthenticated ? (
+      <UserContextHelper>
+        <Profile />
+      </UserContextHelper>
+    ) : (
+      <LoginFrom />
+    ),
   },
   {
     path: "/login",

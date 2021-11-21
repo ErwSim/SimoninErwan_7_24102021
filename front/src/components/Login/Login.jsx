@@ -4,11 +4,12 @@ import { UserContext, MessageContext } from "../../contextes";
 import useInput from "../../hooks/useInput";
 import { AuthService } from "../../services";
 import { Navigate } from "react-router-dom";
-import { PageTitle } from "../PageTitle/PageTitle";
+import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 
 export default function Login(props) {
   const email = useInput("");
   const password = useInput("");
+
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { setMessage } = useContext(MessageContext);
   const authService = new AuthService();
@@ -19,7 +20,7 @@ export default function Login(props) {
     (async function login() {
       try {
         const user = await authService.login(email.value, password.value);
-        setCurrentUser(user);
+        setCurrentUser(user.data);
 
         if (user) {
           setMessage({
@@ -58,7 +59,7 @@ export default function Login(props) {
 
   return !currentUser ? (
     <>
-      <PageTitle title="Connexion" />
+      <PageTitleHelper title="Connexion" />
       <Grid
         container
         direction="column"

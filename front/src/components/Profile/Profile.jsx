@@ -1,13 +1,17 @@
-import { useContext } from "react";
-import { UserContext } from "../../contextes";
-import { PageTitle } from "../PageTitle/PageTitle";
+import { List, ListItem, ListItemText } from "@mui/material";
+import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 
-export function Profile() {
-  const { user } = useContext(UserContext);
+export default function Profile(props) {
+  const { currentUser } = props;
 
   return (
     <>
-      <PageTitle title="Profil" />
+      <PageTitleHelper title="Profil" />
+      <List aria-label="profile detail">
+        <ListItem>
+          <ListItemText primary={currentUser.firstname} />
+        </ListItem>
+      </List>
     </>
   );
 }

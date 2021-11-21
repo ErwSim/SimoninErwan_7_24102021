@@ -17,6 +17,7 @@ import "./Navbar.scss";
 export default function Navbar() {
   const theme = useTheme();
   const smBp = useMediaQuery(theme.breakpoints.up("sm"));
+
   const { currentUser } = useContext(UserContext);
 
   return (
