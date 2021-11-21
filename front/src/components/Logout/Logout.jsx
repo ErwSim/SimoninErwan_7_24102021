@@ -1,14 +1,17 @@
 import { Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../contextes/user.context";
 import { AuthService } from "../../services";
 
 export default function Logout() {
   const { setCurrentUser } = useContext(UserContext);
-  const authService = new AuthService();
 
-  setCurrentUser(null);
-  authService.logout();
+  useEffect(() => {
+    const authService = new AuthService();
+
+    setCurrentUser(null);
+    authService.logout();
+  }, [setCurrentUser]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import { UserContext } from "../../contextes/user.context";
+import { UserContext, MessageContext } from "../../contextes";
 import useInput from "../../hooks/useInput";
 import { AuthService } from "../../services";
 import { Navigate } from "react-router-dom";
@@ -9,12 +9,18 @@ export default function Login() {
   const email = useInput("");
   const password = useInput("");
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { setMessage } = useContext(MessageContext);
   const authService = new AuthService();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     setCurrentUser(authService.login(email.value, password.value));
+    setMessage({
+      type: "success",
+      message: "Connexion réussie",
+      time: 5000,
+    });
   };
 
   return !currentUser ? (
@@ -57,6 +63,8 @@ export default function Login() {
       </Grid>
     </>
   ) : (
-    <Navigate to="/" replace={true} />
+    <>
+      <Navigate to="/" replace={true} />
+    </>
   );
 }

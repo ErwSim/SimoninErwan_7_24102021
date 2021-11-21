@@ -13,6 +13,8 @@ import BottomNavbar from "../BottomNavbar/BottomNavbar";
 import { routes } from "../../routes";
 import { UserContext } from "../../contextes/user.context";
 import { AuthService } from "../../services";
+import Message from "../Message/Message";
+import { MessageContext } from "../../contextes";
 
 export default function App() {
   const muiTheme = useTheme();
@@ -26,21 +28,32 @@ export default function App() {
     [currentUser]
   );
 
+  const [message, setMessage] = useState(false);
+  const messageContextValue = useMemo(
+    () => ({ message, setMessage }),
+    [message]
+  );
+
   return (
-    <UserContext.Provider value={userContextValue}>
-      <ThemeProvider theme={lightTheme}>
-        <Navbar />
-        {smBp ? (
-          <>
-            {elements}
-            <BottomNavbar />
-          </>
-        ) : (
-          <Container sx={{ mt: 3 }}>
-            <Paper elevation={3}>{elements}</Paper>
-          </Container>
-        )}
-      </ThemeProvider>
-    </UserContext.Provider>
+    <MessageContext.Provider value={messageContextValue}>
+      <UserContext.Provider value={userContextValue}>
+        <ThemeProvider theme={lightTheme}>
+          <Navbar />
+          {smBp ? (
+            <>
+              {elements}
+              <BottomNavbar />
+            </>
+          ) : (
+            <Container sx={{ mt: 3 }}>
+              <Paper elevation={3}>{elements}</Paper>
+            </Container>
+          )}
+        </ThemeProvider>
+      </UserContext.Provider>
+      <MessageContext.Consumer>
+        {(value) => (value.message ? <Message {...value.message} /> : "")}
+      </MessageContext.Consumer>
+    </MessageContext.Provider>
   );
 }
