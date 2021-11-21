@@ -3,10 +3,10 @@ import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
-export function BottomNavbar() {
-  const pathname = window.location.pathname;
+export default function BottomNavbar() {
+  const { pathname } = window.location;
   const [value, setValue] = React.useState(pathname);
-  const handleChange = (event: any, newValue: string) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -22,14 +22,14 @@ export function BottomNavbar() {
           value="/signup"
           component={Link}
           to="/signup"
-        ></BottomNavigationAction>
+        />
         <BottomNavigationAction
           label="Connexion"
           icon={<Person />}
           value="/login"
           component={Link}
           to="/login"
-        ></BottomNavigationAction>
+        />
       </BottomNavigation>
     </Paper>
   );
