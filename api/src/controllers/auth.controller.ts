@@ -22,8 +22,12 @@ export class AuthController {
     req: express.Request,
     res: express.Response
   ): Promise<express.Response> {
-    const body: User = req.body;
-    body.password = bcrypt.hashSync(body.password, +process.env.SALT_ROUNDS);
+    const body = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, +process.env.SALT_ROUNDS),
+    };
 
     try {
       const user: IReturnedUser = await this.prisma.user.create({

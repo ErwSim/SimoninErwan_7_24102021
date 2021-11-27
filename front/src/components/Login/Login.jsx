@@ -1,25 +1,26 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import { UserContext, MessageContext } from "../../contextes";
-import useInput from "../../hooks/useInput";
+import { useForm } from "react-hook-form";
 import { AuthService } from "../../services";
 import { Navigate } from "react-router-dom";
 import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 
 export default function Login(props) {
-  const email = useInput("");
-  const password = useInput("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { setMessage } = useContext(MessageContext);
   const authService = new AuthService();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
+  const onSubmit = (data) => {
     (async function login() {
       try {
-        const user = await authService.login(email.value, password.value);
+        const user = await authService.login(data.email, data.password);
         setCurrentUser(user.data);
 
         if (user) {
@@ -49,7 +50,7 @@ export default function Login(props) {
             setMessage({
               type: "error",
               message: "Connexion échouée : Erreur inconnue",
-              time: 5000,
+              time: 10000,
             });
             break;
         }
@@ -62,35 +63,45 @@ export default function Login(props) {
       <PageTitleHelper title="Connexion" />
       <Grid
         container
-        direction="column"
-        justifyContent="center"
         alignItems="center"
         component="form"
-        onSubmit={handleSubmit}
+        spacing={2}
+        columns={12}
+        onSubmit={handleSubmit(onSubmit)}
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "20em" },
-          "& .MuiButton-root": { m: 1, width: "23em" },
+          padding: 2,
+          "& .MuiFormControl-root": { width: "100%" },
         }}
         noValidate
       >
-        <TextField
-          id="email"
-          label="Email"
-          variant="outlined"
-          {...email}
-          required
-        />
-        <TextField
-          id="password"
-          label="Mot de passe"
-          variant="outlined"
-          type="password"
-          {...password}
-          required
-        />
-        <Button variant="contained" type="submit">
-          Connexion
-        </Button>
+        <Grid item xs={12}>
+          <TextField
+            id="email"
+            label="Email"
+            variant="outlined"
+            error={errors.email}
+            {...register("email", { required: true })}
+            required
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            id="password"
+            label="Mot de passe"
+            variant="outlined"
+            type="password"
+            error={errors.password}
+            {...register("password", { required: true })}
+            required
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Button variant="contained" type="submit">
+            Se connecter
+          </Button>
+        </Grid>
       </Grid>
     </>
   ) : (

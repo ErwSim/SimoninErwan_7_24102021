@@ -19,6 +19,23 @@ export class AuthService extends GlobalService {
     }
   }
 
+  async signup(firstname, lastname, email, password) {
+    try {
+      const response = await this.api.post("signup", {
+        firstname,
+        lastname,
+        email,
+        password,
+      });
+      this.storeUser(response.data);
+      this.currentUser = response.data;
+
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   logout() {
     localStorage.removeItem("user");
   }
