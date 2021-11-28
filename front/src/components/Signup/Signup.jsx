@@ -151,6 +151,7 @@ export default function Signup(props) {
           <TextField
             id="email"
             label="Email"
+            type="email"
             variant="outlined"
             {...register("email", {
               required: true,

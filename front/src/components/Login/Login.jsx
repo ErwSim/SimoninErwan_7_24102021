@@ -79,6 +79,7 @@ export default function Login(props) {
             id="email"
             label="Email"
             variant="outlined"
+            type="email"
             error={errors.email}
             {...register("email", { required: true })}
             required
