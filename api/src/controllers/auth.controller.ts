@@ -38,7 +38,7 @@ export class AuthController {
       delete user.resetToken;
       user.token = jwt.sign(user, process.env.JWT_SECRET);
 
-      return res.status(201).json({ user });
+      return res.status(201).json(user);
     } catch (e) {
       const error = new ErrorHandlingHelper(e).prisma();
       return res.status(error.statusCode).json({ error: error.error });

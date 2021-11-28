@@ -1,21 +1,48 @@
 import { Button, Grid, TextField } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate } from "react-router";
 import { MessageContext, UserContext } from "../../contextes";
 import { useForm } from "react-hook-form";
-import { AuthService } from "../../services";
+import { AuthService, UserService } from "../../services";
 import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 
 export default function Signup(props) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { setMessage } = useContext(MessageContext);
+  const [customErrors, setCustomErrors] = useState({
+    firstname: null,
+    lastname: null,
+    email: null,
+    password: null,
+    confirmPassword: null,
+  });
   const authService = new AuthService();
+  const userService = new UserService();
+
+  const checkExistence = async (event) => {
+    event.persist();
+
+    try {
+      await userService.checkUserExists(event.target.value);
+
+      setCustomErrors({
+        email: {
+          color: "error",
+          helperText: "Adresse e-mail déjà utilisée",
+          error: true,
+        },
+      });
+    } catch (e) {
+      setCustomErrors({
+        email: {
+          color: "success",
+          helperText: "Adresse e-mail disponible",
+        },
+      });
+    }
+  };
 
   const onSubmit = (data) => {
     (async function signup() {
@@ -103,9 +130,9 @@ export default function Signup(props) {
             id="firstname"
             label="Prénom"
             variant="outlined"
-            error={errors.firstname}
             {...register("firstname", { required: true })}
             required
+            {...customErrors.firstname}
           />
         </Grid>
 
@@ -114,9 +141,9 @@ export default function Signup(props) {
             id="lastname"
             label="Nom"
             variant="outlined"
-            error={errors.lastname}
             {...register("lastname", { required: true })}
             required
+            {...customErrors.lastname}
           />
         </Grid>
 
@@ -125,9 +152,16 @@ export default function Signup(props) {
             id="email"
             label="Email"
             variant="outlined"
-            error={errors.email}
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: true,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Adresse e-mail invalide",
+              },
+            })}
+            onBlur={checkExistence}
             required
+            {...customErrors.email}
           />
         </Grid>
 
@@ -137,9 +171,9 @@ export default function Signup(props) {
             label="Mot de passe"
             variant="outlined"
             type="password"
-            error={errors.password}
             {...register("password", { required: true })}
             required
+            {...customErrors.password}
           />
         </Grid>
 
@@ -149,9 +183,9 @@ export default function Signup(props) {
             label="Confirmation"
             variant="outlined"
             type="password"
-            error={errors.password}
             {...register("confirmPassword", { required: true })}
             required
+            {...customErrors.confirmPassword}
           />
         </Grid>
 
