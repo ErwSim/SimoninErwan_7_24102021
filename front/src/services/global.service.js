@@ -20,7 +20,7 @@ export class GlobalService {
       const token = JSON.parse(localStorage.getItem("user"))?.token;
 
       if (token) {
-        config.headers.Authorization = `Bear ${token}`;
+        config.headers.Authorization = `Bearer ${token}`;
       }
       return config;
     });
@@ -32,7 +32,8 @@ export class GlobalService {
    */
   async getAll() {
     try {
-      return await this.api.get();
+      const response = await this.api.get();
+      return response.data;
     } catch (e) {
       throw e;
     }
@@ -45,7 +46,8 @@ export class GlobalService {
    */
   async getOneById(id) {
     try {
-      return await this.api.get(id);
+      const response = await this.api.get(id);
+      return response.data;
     } catch (e) {
       throw e;
     }
