@@ -1,17 +1,18 @@
 import Category from "./Category";
 import "./Categories.scss";
 import { CategoryService } from "../../services";
-import { useState } from "react";
-import { useAsync } from "../../hooks";
+import { useEffect, useState } from "react";
 
 export default function Categories() {
-  const categoryService = new CategoryService();
-
   const [categories, setCategories] = useState([]);
 
-  useAsync(categoryService.getAll(), (categories) => {
-    setCategories(categories);
-  });
+  useEffect(() => {
+    const categoryService = new CategoryService();
+    (async () => {
+      const fetchCategories = await categoryService.getAll();
+      setCategories(fetchCategories);
+    })();
+  }, []);
 
   return (
     <div className="categories-wrapper">
