@@ -8,9 +8,14 @@ export function Categories() {
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
+    let isSubscribed = true;
     categoryService.getAll().then((categories) => {
-      setCategories(categories);
+      if (isSubscribed) {
+        setCategories(categories);
+      }
     });
+
+    return () => (isSubscribed = false);
   });
 
   return (
