@@ -34,15 +34,11 @@ export class UserService extends GlobalService {
    * @returns {Promise<boolean>} - True if password has been changed
    */
   async changePassword(id, body) {
-    try {
-      const response = await this.api.put(`${id}/password`, body);
-      if (response.status === 204) {
-        return true;
-      }
-
-      return false;
-    } catch (e) {
-      throw e;
+    const response = await this.api.put(`${id}/password`, body);
+    if (response.status === 204) {
+      return true;
     }
+
+    return false;
   }
 }

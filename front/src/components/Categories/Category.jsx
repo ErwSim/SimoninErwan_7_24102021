@@ -1,9 +1,10 @@
+import { Skeleton } from "@mui/material";
 import { useState } from "react";
 import "./Category.scss";
 
 export default function Category(props) {
   const [active, setActive] = useState(false);
-  const { name, imageUri, description, backgroundFallback } = props;
+  const { name, imageUri, description, backgroundFallback, loading } = props;
 
   const handleClick = () => {
     setActive(true);
@@ -18,13 +19,13 @@ export default function Category(props) {
         className="category-title"
         style={{ backgroundColor: backgroundFallback }}
       >
-        {name}
+        {loading ? <Skeleton /> : name}
       </div>
       <div
         className="category-content"
         style={{ backgroundImage: imageUri ?? "none", opacity: 0.5 }}
       >
-        {description}
+        {loading ? <Skeleton /> : description}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useRoutes } from "react-router-dom";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { lightTheme } from "../../Theme";
 import Navbar from "../Navbar/Navbar";
 import BottomNavbar from "../BottomNavbar/BottomNavbar";
@@ -49,7 +49,9 @@ export default function App() {
             </>
           ) : (
             <Container sx={{ mt: 3 }}>
-              <Paper elevation={3}>{elements}</Paper>
+              <Paper elevation={3} sx={{ padding: "1em" }}>
+                {elements}
+              </Paper>
             </Container>
           )}
         </ThemeProvider>

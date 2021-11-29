@@ -15,7 +15,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../contextes/user.context";
 import { ReactComponent as Logo } from "../../images/logo-white.svg";

@@ -7,7 +7,10 @@ export default function Message(props) {
   const { setMessage } = useContext(MessageContext);
 
   useEffect(() => {
-    setOpen(true);
+    let mounted = true;
+    if (mounted) setOpen(true);
+
+    return () => (mounted = false);
   }, []);
 
   const handleClose = (event, reason) => {

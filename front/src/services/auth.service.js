@@ -1,39 +1,29 @@
 import { GlobalService } from ".";
 
 export class AuthService extends GlobalService {
-  currentUser;
-
   constructor() {
     super("auth/");
   }
 
   async login(email, password) {
-    try {
-      const response = await this.api.post("signin", { email, password });
-      this.storeUser(response.data);
-      this.currentUser = response.data;
+    const response = await this.api.post("signin", { email, password });
+    this.storeUser(response.data);
+    this.currentUser = response.data;
 
-      return response;
-    } catch (e) {
-      throw e;
-    }
+    return response;
   }
 
   async signup(firstname, lastname, email, password) {
-    try {
-      const response = await this.api.post("signup", {
-        firstname,
-        lastname,
-        email,
-        password,
-      });
-      this.storeUser(response.data);
-      this.currentUser = response.data;
+    const response = await this.api.post("signup", {
+      firstname,
+      lastname,
+      email,
+      password,
+    });
+    this.storeUser(response.data);
+    this.currentUser = response.data;
 
-      return response;
-    } catch (e) {
-      throw e;
-    }
+    return response;
   }
 
   logout() {

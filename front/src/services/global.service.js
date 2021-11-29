@@ -1,12 +1,10 @@
 import axios from "axios";
 
 export class GlobalService {
-  api;
-  url;
-
   constructor(url) {
     this.url = url;
     this.api = axios.create({
+      // eslint-disable-next-line no-undef
       baseURL: `${process.env.REACT_APP_API_URL}${url}`,
     });
     this.authInterceptor();
@@ -31,12 +29,8 @@ export class GlobalService {
    * @returns {Promise<T>[]}
    */
   async getAll() {
-    try {
-      const response = await this.api.get();
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await this.api.get();
+    return response.data;
   }
 
   /**
@@ -45,12 +39,8 @@ export class GlobalService {
    * @returns {Promise<T>}
    */
   async getOneById(id) {
-    try {
-      const response = await this.api.get(id);
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await this.api.get(id);
+    return response.data;
   }
 
   /**
@@ -59,10 +49,6 @@ export class GlobalService {
    * @returns {Promise<T>} - The created element
    */
   async create(payload) {
-    try {
-      return await this.api.post(payload);
-    } catch (e) {
-      throw e;
-    }
+    return await this.api.post(payload);
   }
 }
