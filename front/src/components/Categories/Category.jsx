@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Category.scss";
 
-export function Category(props) {
+export default function Category(props) {
   const [active, setActive] = useState(false);
   const { name, imageUri, description, backgroundFallback } = props;
 

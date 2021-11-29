@@ -5,10 +5,12 @@ import Logout from "../components/Logout/Logout";
 import Home from "../components/Home/Home";
 import Profile from "../components/Profile/Profile";
 import UserContextHelper from "../components/helper-components/UserContextHelper/UserContextHelper";
+import { ManageCategories } from "../components/ManageCategories/ManageCategories";
+import Unauthorized from "../components/Unauthorized/Unauthorized";
 
 const LoginFrom = () => <Login from={window.location.pathname} />;
 
-export const routes = (isAuthenticated) => [
+export const routes = ({ isAuthenticated = false, isAdmin = false }) => [
   {
     path: "/",
     element: isAuthenticated ? (
@@ -40,6 +42,10 @@ export const routes = (isAuthenticated) => [
   {
     path: "/logout",
     element: <Logout />,
+  },
+  {
+    path: "/manage-categories",
+    element: isAdmin ? <ManageCategories /> : <Unauthorized />,
   },
   {
     path: "*",

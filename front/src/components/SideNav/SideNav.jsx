@@ -1,8 +1,14 @@
 import { ArrowBack } from "@mui/icons-material";
-import { Divider, Drawer, IconButton } from "@mui/material";
-import { Categories } from "../Categories/Categories";
+import { Button, Divider, Drawer, IconButton } from "@mui/material";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../contextes/user.context";
+import Categories from "../Categories/Categories";
 
-export function SideNav(props) {
+export default function SideNav(props) {
+  const { currentUser } = useContext(UserContext);
+  const isAdmin = currentUser?.admin;
+
   return (
     <Drawer
       anchor={props.sideAnchor}
@@ -14,8 +20,20 @@ export function SideNav(props) {
       </IconButton>
       <Divider sx={{ mt: 2, mb: 2 }} />
       <Categories />
-      <Divider sx={{ mt: 2, mb: 2 }} />
-      Gérer
+      {isAdmin ? (
+        <>
+          <Divider sx={{ mt: 2, mb: 2 }} />
+          <Button
+            component={Link}
+            to="/manage-categories"
+            onClick={() => props.onClose(false)}
+          >
+            Gérer les catégories
+          </Button>
+        </>
+      ) : (
+        ""
+      )}
     </Drawer>
   );
 }

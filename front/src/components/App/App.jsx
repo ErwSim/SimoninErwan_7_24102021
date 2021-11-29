@@ -27,7 +27,9 @@ export default function App() {
     [currentUser]
   );
   const isAuthenticated = currentUser !== null;
-  const elements = useRoutes(routes(isAuthenticated));
+  const elements = useRoutes(
+    routes({ isAuthenticated, isAdmin: currentUser?.admin })
+  );
 
   const [message, setMessage] = useState(false);
   const messageContextValue = useMemo(

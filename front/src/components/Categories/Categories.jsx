@@ -1,9 +1,9 @@
-import { Category } from "./Category";
+import Category from "./Category";
 import "./Categories.scss";
 import { CategoryService } from "../../services";
 import { useEffect, useState } from "react";
 
-export function Categories() {
+export default function Categories() {
   const categoryService = new CategoryService();
 
   const [categories, setCategories] = useState([]);

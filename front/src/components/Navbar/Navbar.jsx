@@ -19,7 +19,7 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../contextes/user.context";
 import { ReactComponent as Logo } from "../../images/logo-white.svg";
-import { SideNav } from "../SideNav/SideNav";
+import SideNav from "../SideNav/SideNav";
 import "./Navbar.scss";
 
 export default function Navbar() {
@@ -32,21 +32,29 @@ export default function Navbar() {
 
   return (
     <>
-      <SideNav
-        opened={sideOpened}
-        onClose={(e) => setSideOpened(e)}
-        sideAnchor="left"
-      />
+      {currentUser ? (
+        <SideNav
+          opened={sideOpened}
+          onClose={(e) => setSideOpened(e)}
+          sideAnchor="left"
+        />
+      ) : (
+        ""
+      )}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              aria-label="opened categories"
-              color="inherit"
-              onClick={() => setSideOpened(!sideOpened)}
-            >
-              <Menu />
-            </IconButton>
+            {currentUser ? (
+              <IconButton
+                aria-label="opened categories"
+                color="inherit"
+                onClick={() => setSideOpened(!sideOpened)}
+              >
+                <Menu />
+              </IconButton>
+            ) : (
+              ""
+            )}
             <MuiLink component={Link} to="/" sx={{ flexGrow: 1 }}>
               <Logo width={200} />
             </MuiLink>
