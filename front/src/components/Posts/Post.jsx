@@ -8,7 +8,9 @@ import {
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { useState } from "react";
+import UserContextHelper from "../helper-components/UserContextHelper/UserContextHelper";
 import "./Post.scss";
+import Vote from "./Vote";
 
 export default function Post(props) {
   const { post } = props;
@@ -17,6 +19,11 @@ export default function Post(props) {
   return (
     <Card sx={{ marginBottom: 2 }}>
       <CardHeader
+        action={
+          <UserContextHelper>
+            <Vote post={post} />
+          </UserContextHelper>
+        }
         avatar={<Avatar sx={{ bgcolor: red[500] }}>{post.avatarName}</Avatar>}
         title={post.title}
         subheader={`Créé le ${post.createdAt} par ${post.User.lastname} ${post.User.firstname}`}

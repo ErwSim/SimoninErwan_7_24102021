@@ -19,7 +19,7 @@ export default function Posts(props) {
     (async () => {
       await fetchCategory();
     })();
-  }, []);
+  }, [categoryId]);
 
   const handleCreateClose = () => {
     fetchCategory();
