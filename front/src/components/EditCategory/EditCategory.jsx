@@ -11,7 +11,6 @@ import {
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { hex2bufferHelper } from "../../helpers";
 import { CategoryService } from "../../services";
 
 export default function EditCategory(props) {
@@ -19,10 +18,10 @@ export default function EditCategory(props) {
   const categoryService = new CategoryService();
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      name: category.name,
-      description: category.description,
-      imageUri: category.imageUri,
-      backgroundFallback: category.backgroundFallback,
+      name: category?.name,
+      description: category?.description,
+      imageUri: category?.imageUri,
+      backgroundFallback: category?.backgroundFallback,
     },
   });
   const [customErrors, setCustomErrors] = useState({

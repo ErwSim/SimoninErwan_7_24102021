@@ -50,7 +50,7 @@ export class GlobalService {
    * @returns {Promise<T>} - The created element
    */
   async create(payload) {
-    return await this.api.post(payload);
+    return await this.api.post(this.fullUrl, payload);
   }
 
   /**

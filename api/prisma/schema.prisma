@@ -16,7 +16,7 @@ model Image {
 model Category {
   id                 Int     @id @default(autoincrement())
   name               String  @db.VarChar(100)
-  imageUri           String
+  imageUri           String?
   description        String?
   backgroundFallback Bytes   @default(dbgenerated("(0xffffff)")) @db.VarBinary(3)
   Posts              Post[]
