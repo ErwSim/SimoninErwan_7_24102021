@@ -1,18 +1,11 @@
 import AddIcon from "@mui/icons-material/Add";
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  Fab,
-  Typography,
-} from "@mui/material";
-import { red } from "@mui/material/colors";
+import { Fab } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CategoryService } from "../../services";
 import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 import NewPost from "./NewPost";
+import Post from "./Post";
 
 export default function Posts(props) {
   const { currentUser } = props;
@@ -67,26 +60,7 @@ export default function Posts(props) {
           >
             <AddIcon />
           </Fab>
-          {posts
-            ? posts.map((post) => (
-                <Card key={post.id} sx={{ marginBottom: 2 }}>
-                  <CardHeader
-                    avatar={
-                      <Avatar sx={{ bgcolor: red[500] }}>
-                        {post.avatarName}
-                      </Avatar>
-                    }
-                    title={post.title}
-                    subheader={`Créé le ${post.createdAt} par ${post.User.lastname} ${post.User.firstname}`}
-                  ></CardHeader>
-                  <CardContent>
-                    <Typography variant="body2" color="text.secondary">
-                      {post.content}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))
-            : ""}
+          {posts ? posts.map((post) => <Post key={post.id} post={post} />) : ""}
           <NewPost
             open={createOpen}
             onClose={handleCreateClose}
