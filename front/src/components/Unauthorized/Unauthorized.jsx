@@ -4,9 +4,9 @@ export default function Unauthorized() {
   return (
     <>
       <PageTitleHelper title="Non autorisé" />
-      L'accès à cette page n'est pas autorisée.
+      L&pos;accès à cette page n&apos;est pas autorisée.
       <br />
-      Si vous pensez que c'est une erreur, veuillez contacter votre
+      Si vous pensez que c&pos;est une erreur, veuillez contacter votre
       administrateur.
     </>
   );

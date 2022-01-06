@@ -16,8 +16,12 @@ export class CategoryController {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      const body: Category = req.body;
+      req.body.backgroundFallback = Buffer.from(
+        req.body.backgroundFallback.replace("#", "").toString(16),
+        "hex"
+      );
 
+      const body: Category = req.body;
       const category = await this.prisma.category.create({ data: body });
 
       return res.status(201).json(category);
@@ -86,6 +90,11 @@ export class CategoryController {
   ): Promise<express.Response> {
     try {
       const id = +req.params.id;
+
+      req.body.backgroundFallback = Buffer.from(
+        req.body.backgroundFallback.replace("#", "").toString(16),
+        "hex"
+      );
       const body: Partial<Category> = req.body;
       const category = await this.prisma.category.update({
         where: { id },

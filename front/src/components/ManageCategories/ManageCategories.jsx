@@ -1,3 +1,9 @@
+import Categories from "../Categories/Categories";
+
 export function ManageCategories() {
-  return <></>;
+  return (
+    <>
+      <Categories admin />
+    </>
+  );
 }

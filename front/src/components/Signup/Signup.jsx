@@ -1,5 +1,5 @@
 import { Button, Grid, TextField } from "@mui/material";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Navigate } from "react-router";
 import { MessageContext, UserContext } from "../../contextes";
 import { useForm } from "react-hook-form";
@@ -192,7 +192,7 @@ export default function Signup(props) {
 
         <Grid item xs={12}>
           <Button variant="contained" type="submit">
-            S'inscrire
+            S&apos;inscrire
           </Button>
         </Grid>
       </Grid>
