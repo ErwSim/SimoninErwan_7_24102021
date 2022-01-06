@@ -7,6 +7,7 @@ import Profile from "../components/Profile/Profile";
 import UserContextHelper from "../components/helper-components/UserContextHelper/UserContextHelper";
 import { ManageCategories } from "../components/ManageCategories/ManageCategories";
 import Unauthorized from "../components/Unauthorized/Unauthorized";
+import Posts from "../components/Posts/Posts";
 
 const LoginFrom = () => <Login from={window.location.pathname} />;
 
@@ -46,6 +47,10 @@ export const routes = ({ isAuthenticated = false, isAdmin = false }) => [
   {
     path: "/manage-categories",
     element: isAdmin ? <ManageCategories /> : <Unauthorized />,
+  },
+  {
+    path: "/c/:categoryId",
+    element: isAuthenticated ? <Posts /> : <LoginFrom />,
   },
   {
     path: "*",

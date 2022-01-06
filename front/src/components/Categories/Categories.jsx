@@ -1,4 +1,4 @@
-import Category from "./Category";
+import CategoryBox from "./CategoryBox";
 import "./Categories.scss";
 import { CategoryService } from "../../services";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { buffer2hexHelper } from "../../helpers";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditCategory from "../EditCategory/EditCategory";
+import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 
 export default function Categories(props) {
   const [categories, setCategories] = useState([]);
@@ -42,10 +43,11 @@ export default function Categories(props) {
 
   return (
     <>
+      {admin ? <PageTitleHelper title="Gestion des catégories" /> : ""}
       <div className="categories-wrapper">
         {categories.length ? (
           categories.map((category) => (
-            <Category
+            <CategoryBox
               key={category.id}
               {...category}
               admin={admin}
@@ -53,7 +55,7 @@ export default function Categories(props) {
             />
           ))
         ) : (
-          <Category loading />
+          <CategoryBox loading />
         )}
       </div>
       {admin ? (

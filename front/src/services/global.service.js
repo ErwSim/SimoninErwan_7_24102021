@@ -5,9 +5,7 @@ export class GlobalService {
     this.url = url;
     // eslint-disable-next-line no-undef
     this.fullUrl = `${process.env.REACT_APP_API_URL}${url}`;
-    this.api = axios.create({
-      baseURL: this.fullUrl,
-    });
+    this.api = axios.create();
     this.authInterceptor();
   }
 
@@ -27,20 +25,22 @@ export class GlobalService {
 
   /**
    * Get all elements of a model
+   * @param {string} filter - A filter
    * @returns {Promise<T>[]}
    */
-  async getAll() {
-    const response = await this.api.get();
+  async getAll(filter = "") {
+    const response = await this.api.get(this.fullUrl + filter);
     return response.data;
   }
 
   /**
    * Get one elemnt of a model by its id
    * @param {number} id - The searched id
+   * * @param {string} filter - A filter
    * @returns {Promise<T>}
    */
-  async getOneById(id) {
-    const response = await this.api.get(this.fullUrl + id);
+  async getOneById(id, filter = "") {
+    const response = await this.api.get(this.fullUrl + id + filter);
     return response.data;
   }
 

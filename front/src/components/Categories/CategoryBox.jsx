@@ -1,18 +1,21 @@
 import { Skeleton } from "@mui/material";
 import { useState } from "react";
 import EditCategory from "../EditCategory/EditCategory";
-import "./Category.scss";
+import { useNavigate } from "react-router-dom";
+import "./CategoryBox.scss";
 
-export default function Category(props) {
+export default function CategoryBox(props) {
   const [active, setActive] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const navigate = useNavigate();
 
   let { name, imageUri, description, backgroundFallback, loading, admin } =
     props;
 
   const handleClick = () => {
     if (!admin) {
-      setActive(true);
+      setActive(!active);
+      navigate(`/c/${props.id}`);
     } else {
       setEditOpen(true);
     }

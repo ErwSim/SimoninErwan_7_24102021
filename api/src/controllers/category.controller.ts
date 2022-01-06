@@ -64,6 +64,7 @@ export class CategoryController {
     try {
       const id = +req.params.id;
       const filter = req.filter;
+      filter.where = req.filter.where ?? {};
       filter.where.id = id;
       const category = await this.prisma.category.findUnique(filter);
 
