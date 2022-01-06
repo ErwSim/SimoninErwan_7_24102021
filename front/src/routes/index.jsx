@@ -50,7 +50,13 @@ export const routes = ({ isAuthenticated = false, isAdmin = false }) => [
   },
   {
     path: "/c/:categoryId",
-    element: isAuthenticated ? <Posts /> : <LoginFrom />,
+    element: isAuthenticated ? (
+      <UserContextHelper>
+        <Posts />
+      </UserContextHelper>
+    ) : (
+      <LoginFrom />
+    ),
   },
   {
     path: "*",

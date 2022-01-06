@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
   TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -24,6 +22,8 @@ export default function EditCategory(props) {
       backgroundFallback: category?.backgroundFallback,
     },
   });
+
+  // eslint-disable-next-line no-unused-vars
   const [customErrors, setCustomErrors] = useState({
     name: null,
     description: null,
