@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient, Prisma, User } from "@prisma/client";
 import express from "express";
 import bcrypt from "bcrypt";
 import { UserNotFoundError, UserWrongPasswordError } from "@errors";
@@ -100,6 +100,30 @@ export class UserController {
       if (e instanceof UserWrongPasswordError) {
         return res.status(401).json({ error: e.message });
       }
+    }
+  }
+
+  /**
+   * Delete one user depending on its id
+   * @param req - Express request
+   * @param res - Express response
+   * @returns Empty content
+   */
+  async deleteOne(
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> {
+    try {
+      const id = +req.params.userId;
+      let filter: { where: Partial<User> } = { where: { id } };
+      await this.prisma.post.delete({
+        where: filter.where,
+      });
+
+      return res.status(204).send();
+    } catch (e) {
+      const error = new ErrorHandlingHelper(e).prisma();
+      return res.status(error.statusCode).json({ error: error.error });
     }
   }
 }

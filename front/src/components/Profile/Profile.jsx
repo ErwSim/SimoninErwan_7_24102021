@@ -13,15 +13,17 @@ import {
   DialogActions,
 } from "@mui/material";
 import { useContext, useState } from "react";
-import { MessageContext } from "../../contextes";
+import { MessageContext, UserContext } from "../../contextes";
 import { inputPropsHelper } from "../../helpers/input-props.helper";
-import { UserService } from "../../services";
+import { AuthService, UserService } from "../../services";
 import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
 
 export default function Profile(props) {
   const userService = new UserService();
+  const authService = new AuthService();
 
   const { setMessage } = useContext(MessageContext);
+  const { setCurrentUser } = useContext(UserContext);
 
   const theme = useTheme();
   const dialogFullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -95,6 +97,29 @@ export default function Profile(props) {
     }
   };
 
+  const handleClickDelete = () => {
+    (async () => {
+      try {
+        await userService.delete(currentUser.id);
+        setMessage({
+          type: "success",
+          message: "Suppression effectuée",
+          time: 5000,
+        });
+
+        setCurrentUser(null);
+        authService.logout();
+      } catch (e) {
+        console.error(e);
+        setMessage({
+          type: "error",
+          message: "Une erreur est survenue",
+          time: 10000,
+        });
+      }
+    })();
+  };
+
   return (
     <>
       <PageTitleHelper title="Profil" />
@@ -116,6 +141,14 @@ export default function Profile(props) {
           <ListItemText {...listW50}>
             <Button variant="contained" onClick={handleClickOpenPassword}>
               Modifier
+            </Button>
+          </ListItemText>
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Supprimer le compte" inset {...listW50} />
+          <ListItemText {...listW50}>
+            <Button variant="contained" onClick={handleClickDelete}>
+              Supprimer
             </Button>
           </ListItemText>
         </ListItem>

@@ -6,6 +6,7 @@ export function ownMiddleware(
   next: express.NextFunction
 ) {
   try {
+    console.log(req.params, req.userId);
     if (+req.params.userId === req.userId) {
       next();
     } else {
