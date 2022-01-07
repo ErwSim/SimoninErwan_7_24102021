@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CategoryService } from "../../services";
 import PageTitleHelper from "../helper-components/PageTitleHelper/PageTitleHelper";
+import UserContextHelper from "../helper-components/UserContextHelper/UserContextHelper";
 import NewPost from "./NewPost";
 import Post from "./Post";
 
@@ -60,7 +61,17 @@ export default function Posts(props) {
           >
             <AddIcon />
           </Fab>
-          {posts ? posts.map((post) => <Post key={post.id} post={post} />) : ""}
+          <UserContextHelper>
+            {posts
+              ? posts.map((post) => (
+                  <Post
+                    key={post.id}
+                    post={post}
+                    fetchCategory={fetchCategory}
+                  />
+                ))
+              : ""}
+          </UserContextHelper>
           <NewPost
             open={createOpen}
             onClose={handleCreateClose}

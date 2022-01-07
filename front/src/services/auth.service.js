@@ -6,7 +6,10 @@ export class AuthService extends GlobalService {
   }
 
   async login(email, password) {
-    const response = await this.api.post("signin", { email, password });
+    const response = await this.api.post(this.fullUrl + "signin", {
+      email,
+      password,
+    });
     this.storeUser(response.data);
     this.currentUser = response.data;
 
@@ -14,7 +17,7 @@ export class AuthService extends GlobalService {
   }
 
   async signup(firstname, lastname, email, password) {
-    const response = await this.api.post("signup", {
+    const response = await this.api.post(this.fullUrl + "signup", {
       firstname,
       lastname,
       email,

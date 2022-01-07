@@ -2,19 +2,42 @@ import {
   Avatar,
   Button,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
+  IconButton,
   Typography,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import UserContextHelper from "../helper-components/UserContextHelper/UserContextHelper";
 import "./Post.scss";
 import Vote from "./Vote";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { PostService } from "../../services";
+import { MessageContext } from "../../contextes";
 
 export default function Post(props) {
-  const { post } = props;
+  const { currentUser, post, fetchCategory } = props;
   const [hidden, setHidden] = useState(post.spoiler);
+  const postService = new PostService();
+  const { setMessage } = useContext(MessageContext);
+
+  const onClickDelete = () => {
+    (async () => {
+      try {
+        await postService.delete(post.id);
+        fetchCategory();
+      } catch (e) {
+        console.error(e);
+        setMessage({
+          type: "error",
+          message: "Une erreur est survenue",
+          time: 5000,
+        });
+      }
+    })();
+  };
 
   return (
     <Card sx={{ marginBottom: 2 }}>
@@ -52,6 +75,15 @@ export default function Post(props) {
           )}
         </Typography>
       </CardContent>
+      <CardActions>
+        {currentUser.admin ? (
+          <IconButton aria-label="delete" onClick={onClickDelete}>
+            <DeleteIcon></DeleteIcon>
+          </IconButton>
+        ) : (
+          ""
+        )}
+      </CardActions>
     </Card>
   );
 }

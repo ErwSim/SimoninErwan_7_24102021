@@ -59,6 +59,11 @@ export default function NewPost(props) {
       } catch (e) {
         if (e instanceof Error) {
           console.error(e);
+          setMessage({
+            type: "error",
+            message: "Une erreur est survenue",
+            time: 5000,
+          });
         }
       }
     })();
