@@ -76,6 +76,7 @@ export class PostController {
     try {
       const id = +req.params.id;
       const filter = req.filter;
+      filter.where = {};
       filter.where.id = id;
       // Used when querying own post
       if (+req.params.userId) {

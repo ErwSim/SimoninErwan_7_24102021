@@ -5,7 +5,9 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Collapse,
   IconButton,
+  styled,
   Typography,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
@@ -14,12 +16,29 @@ import UserContextHelper from "../helper-components/UserContextHelper/UserContex
 import "./Post.scss";
 import Vote from "./Vote";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { PostService } from "../../services";
 import { MessageContext } from "../../contextes";
+import Messages from "./Messages";
+import NewPost from "./NewPost";
+
+const ExpandMore = styled((props) => {
+  // eslint-disable-next-line no-unused-vars
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 export default function Post(props) {
-  const { currentUser, post, fetchCategory } = props;
+  const { currentUser, post, reload, category } = props;
   const [hidden, setHidden] = useState(post.spoiler);
+  const [expanded, setExpanded] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
   const postService = new PostService();
   const { setMessage } = useContext(MessageContext);
 
@@ -27,7 +46,7 @@ export default function Post(props) {
     (async () => {
       try {
         await postService.delete(post.id);
-        fetchCategory();
+        reload();
       } catch (e) {
         console.error(e);
         setMessage({
@@ -39,13 +58,37 @@ export default function Post(props) {
     })();
   };
 
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  const handleCreateClose = () => {
+    reload();
+    setCreateOpen(false);
+  };
+
+  const handleCreateClick = () => {
+    setCreateOpen(true);
+  };
+
   return (
     <Card sx={{ marginBottom: 2 }}>
       <CardHeader
         action={
-          <UserContextHelper>
-            <Vote post={post} />
-          </UserContextHelper>
+          <>
+            <Button onClick={handleCreateClick}>Répondre</Button>
+            <UserContextHelper>
+              <NewPost
+                open={createOpen}
+                onClose={handleCreateClose}
+                post={post}
+                category={category}
+                currentUser={currentUser}
+                newPost
+              />
+              <Vote post={post} />
+            </UserContextHelper>
+          </>
         }
         avatar={<Avatar sx={{ bgcolor: red[500] }}>{post.avatarName}</Avatar>}
         title={post.title}
@@ -75,15 +118,34 @@ export default function Post(props) {
           )}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions disableSpacing>
         {currentUser.admin ? (
           <IconButton aria-label="delete" onClick={onClickDelete}>
-            <DeleteIcon></DeleteIcon>
+            <DeleteIcon />
           </IconButton>
         ) : (
           ""
         )}
+
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show-more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
       </CardActions>
+      <Collapse
+        in={expanded}
+        timeout="auto"
+        unmountOnExit
+        sx={{ paddingLeft: 2 }}
+      >
+        <UserContextHelper>
+          <Messages post={post} category={category}></Messages>
+        </UserContextHelper>
+      </Collapse>
     </Card>
   );
 }

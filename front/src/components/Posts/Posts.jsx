@@ -8,8 +8,7 @@ import UserContextHelper from "../helper-components/UserContextHelper/UserContex
 import NewPost from "./NewPost";
 import Post from "./Post";
 
-export default function Posts(props) {
-  const { currentUser } = props;
+export default function Posts() {
   const categoryService = new CategoryService();
   const [category, setCategory] = useState();
   const [posts, setPosts] = useState();
@@ -56,7 +55,7 @@ export default function Posts(props) {
           <PageTitleHelper title={category.name} />
           <Fab
             color="primary"
-            aria-label="add-category"
+            aria-label="add-post"
             onClick={handleCreateClick}
           >
             <AddIcon />
@@ -67,17 +66,18 @@ export default function Posts(props) {
                   <Post
                     key={post.id}
                     post={post}
-                    fetchCategory={fetchCategory}
+                    category={category}
+                    reload={fetchCategory}
                   />
                 ))
               : ""}
+            <NewPost
+              open={createOpen}
+              onClose={handleCreateClose}
+              category={category}
+              newPost
+            />
           </UserContextHelper>
-          <NewPost
-            open={createOpen}
-            onClose={handleCreateClose}
-            category={category}
-            currentUser={currentUser}
-          />
         </>
       ) : (
         ""

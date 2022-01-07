@@ -15,7 +15,7 @@ import { MessageContext } from "../../contextes";
 import { PostService } from "../../services";
 
 export default function NewPost(props) {
-  const { onClose, open, category, post, currentUser } = props;
+  const { onClose, open, category, post, currentUser, newPost } = props;
   const postService = new PostService();
   const { register, handleSubmit } = useForm({});
   const { setMessage } = useContext(MessageContext);
@@ -32,7 +32,7 @@ export default function NewPost(props) {
       const { title, content, spoiler } = data;
 
       try {
-        const postData = post
+        const postData = !newPost
           ? await postService.update(post.id, {
               title,
               content,
@@ -89,14 +89,18 @@ export default function NewPost(props) {
             "& .MuiFormControl-root": { width: "100%" },
           }}
         >
-          <TextField
-            id="title"
-            label="Titre"
-            variant="outlined"
-            {...register("title", { required: post ? false : true })}
-            required={post ? false : true}
-            {...customErrors.title}
-          />
+          {!post ? (
+            <TextField
+              id="title"
+              label="Titre"
+              variant="outlined"
+              {...register("title", { required: post ? false : true })}
+              required={post ? false : true}
+              {...customErrors.title}
+            />
+          ) : (
+            ""
+          )}
 
           <TextField
             id="content"
