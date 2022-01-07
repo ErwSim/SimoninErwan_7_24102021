@@ -1,9 +1,9 @@
 /**
  * Enum for votes
  * @readonly
- * @enum {number}
+ * @enum {string}
  */
 export const VOTE_DEFINITION = {
-  UPVOTE: 1,
-  DOWNVOTE: 2,
+  UPVOTE: "UPVOTE",
+  DOWNVOTE: "DOWNVOTE",
 };

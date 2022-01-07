@@ -40,7 +40,7 @@ export function main() {
   app.use("/users/:userId/posts", authMiddleware, ownMiddleware, userPostRoute);
   app.use("/categories", authMiddleware, categoryRoute);
   app.use("/posts", authMiddleware, postRoute);
-  app.use("/votes", authMiddleware, ownMiddleware, userPostVoteRoute);
+  app.use("/votes", authMiddleware, userPostVoteRoute);
   app.use("/images", imageRoute);
 
   app.listen(port, () => {
