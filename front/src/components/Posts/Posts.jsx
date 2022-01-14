@@ -54,6 +54,11 @@ export default function Posts() {
             color="primary"
             aria-label="add-post"
             onClick={handleCreateClick}
+            sx={{
+              position: "fixed",
+              bottom: 25,
+              right: 25,
+            }}
           >
             <AddIcon />
           </Fab>
