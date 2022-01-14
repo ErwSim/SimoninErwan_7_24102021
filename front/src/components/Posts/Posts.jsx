@@ -56,8 +56,9 @@ export default function Posts() {
             onClick={handleCreateClick}
             sx={{
               position: "fixed",
-              bottom: 25,
+              bottom: 75,
               right: 25,
+              zIndex: 500,
             }}
           >
             <AddIcon />

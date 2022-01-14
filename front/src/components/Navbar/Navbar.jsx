@@ -62,6 +62,7 @@ export default function Navbar(props) {
               <Logo width={200} />
             </MuiLink>
 
+            <ThemeSwitchHelper setTheme={setTheme} />
             {smBp ? (
               <Typography
                 variant="body1"
@@ -76,7 +77,6 @@ export default function Navbar(props) {
                   },
                 }}
               >
-                <ThemeSwitchHelper setTheme={setTheme} />
                 {currentUser ? (
                   <>
                     <NavLink

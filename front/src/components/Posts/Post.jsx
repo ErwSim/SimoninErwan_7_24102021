@@ -96,12 +96,10 @@ export default function Post(props) {
         subheader={`Créé le ${post.createdAt} par ${post.User.lastname} ${post.User.firstname}`}
       ></CardHeader>
       <CardContent>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          className={hidden && post.spoiler ? "spoiler" : ""}
-        >
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+        <ReactMarkdown className={hidden && post.spoiler ? "spoiler" : ""}>
+          {post.content}
+        </ReactMarkdown>
+        <Typography variant="body2" color="text.secondary">
           {post.spoiler ? (
             hidden ? (
               <>
