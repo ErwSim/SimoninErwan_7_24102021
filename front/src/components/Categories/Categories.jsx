@@ -64,6 +64,11 @@ export default function Categories(props) {
             color="primary"
             aria-label="add-category"
             onClick={handleCreateClick}
+            sx={{
+              position: "fixed",
+              bottom: 25,
+              right: 25,
+            }}
           >
             <AddIcon />
           </Fab>

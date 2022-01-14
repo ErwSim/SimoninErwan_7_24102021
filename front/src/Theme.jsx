@@ -1,17 +1,39 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
+import { pink, purple, red } from "@mui/material/colors";
 
-let lightTheme = createTheme({
+let darkTheme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
-      light: "#fd5733",
-      main: "#fd2d01",
-      dark: "#b11f00",
+      light: red[300],
+      main: red[700],
+      dark: red[900],
       contrastText: "#fff",
     },
     secondary: {
-      light: "#ffdfdf",
-      main: "#ffd7d7",
-      dark: "#b29696",
+      light: purple["A100"],
+      main: purple["A200"],
+      dark: purple["A700"],
+      contrastText: "#000",
+    },
+  },
+});
+
+darkTheme = responsiveFontSizes(darkTheme);
+
+let lightTheme = createTheme({
+  palette: {
+    mode: "light",
+    primary: {
+      light: pink[400],
+      main: pink[600],
+      dark: pink[800],
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: purple["A100"],
+      main: purple["A200"],
+      dark: purple["A700"],
       contrastText: "#000",
     },
   },
@@ -19,4 +41,4 @@ let lightTheme = createTheme({
 
 lightTheme = responsiveFontSizes(lightTheme);
 
-export { lightTheme };
+export { lightTheme, darkTheme };

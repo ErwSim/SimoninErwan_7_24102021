@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useRoutes } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { lightTheme } from "../../Theme";
+import { darkTheme } from "../../Theme";
 import Navbar from "../Navbar/Navbar";
 import BottomNavbar from "../BottomNavbar/BottomNavbar";
 import { routes } from "../../routes";
@@ -19,6 +19,7 @@ import { MessageContext } from "../../contextes";
 export default function App() {
   const muiTheme = useTheme();
   const smBp = useMediaQuery(muiTheme.breakpoints.down("sm"));
+  const [theme, setTheme] = useState(darkTheme);
   const authService = new AuthService();
 
   const [currentUser, setCurrentUser] = useState(authService.getStoredUser());
@@ -40,12 +41,12 @@ export default function App() {
   return (
     <MessageContext.Provider value={messageContextValue}>
       <UserContext.Provider value={userContextValue}>
-        <ThemeProvider theme={lightTheme}>
-          <Navbar />
+        <ThemeProvider theme={theme}>
+          <Navbar setTheme={setTheme} />
           {smBp ? (
             <>
               {elements}
-              <BottomNavbar />
+              <BottomNavbar setTheme={setTheme} />
             </>
           ) : (
             <Container sx={{ mt: 3 }}>

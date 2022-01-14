@@ -19,10 +19,13 @@ import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../contextes/user.context";
 import { ReactComponent as Logo } from "../../images/logo-white.svg";
+import { ThemeSwitchHelper } from "../helper-components/ThemeSwitchHelper/ThemeSwitchHelper";
 import SideNav from "../SideNav/SideNav";
 import "./Navbar.scss";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const { setTheme } = props;
+
   const theme = useTheme();
   const smBp = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -73,6 +76,7 @@ export default function Navbar() {
                   },
                 }}
               >
+                <ThemeSwitchHelper setTheme={setTheme} />
                 {currentUser ? (
                   <>
                     <NavLink
