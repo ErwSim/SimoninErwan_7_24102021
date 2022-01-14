@@ -106,6 +106,7 @@ export default function NewPost(props) {
             id="content"
             label="Contenu"
             variant="outlined"
+            placeholder="Tapez votre message ici, le markdown est pris en charge"
             rows={10}
             {...register("content", { required: true })}
             multiline

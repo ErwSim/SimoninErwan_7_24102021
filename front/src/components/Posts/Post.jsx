@@ -21,6 +21,7 @@ import { PostService } from "../../services";
 import { MessageContext } from "../../contextes";
 import Messages from "./Messages";
 import NewPost from "./NewPost";
+import ReactMarkdown from "react-markdown";
 
 const ExpandMore = styled((props) => {
   // eslint-disable-next-line no-unused-vars
@@ -100,7 +101,7 @@ export default function Post(props) {
           color="text.secondary"
           className={hidden && post.spoiler ? "spoiler" : ""}
         >
-          {post.content}
+          <ReactMarkdown>{post.content}</ReactMarkdown>
           {post.spoiler ? (
             hidden ? (
               <>
