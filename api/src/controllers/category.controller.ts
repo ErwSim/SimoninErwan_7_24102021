@@ -42,7 +42,7 @@ export class CategoryController {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      const categories = await this.prisma.category.findMany(req.filter);
+      const categories = await this.prisma.category.findMany();
 
       return res.status(200).json(categories);
     } catch (e) {
@@ -63,10 +63,37 @@ export class CategoryController {
   ): Promise<express.Response> {
     try {
       const id = +req.params.id;
-      const filter = req.filter;
-      filter.where = req.filter.where ?? {};
-      filter.where.id = id;
-      const category = await this.prisma.category.findUnique(filter);
+      const category = await this.prisma.category.findUnique({ where: { id } });
+
+      if (!category) {
+        return res.status(404).json({ error: "categoryNotFound" });
+      }
+
+      return res.status(200).json(category);
+    } catch (e) {
+      const error = new ErrorHandlingHelper(e).prisma();
+      return res.status(error.statusCode).json({ error: error.error });
+    }
+  }
+
+  /**
+   * Get one category filtered by id
+   * @param req - Express request
+   * @param res - Express response
+   * @returns The requested category as express Response
+   */
+  async getOneWithUsers(
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> {
+    try {
+      const id = +req.params.id;
+      const category = await this.prisma.category.findUnique({
+        where: { id },
+        include: {
+          Posts: { include: { User: true }, orderBy: { createdAt: "desc" } },
+        },
+      });
 
       if (!category) {
         return res.status(404).json({ error: "categoryNotFound" });

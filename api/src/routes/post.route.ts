@@ -7,6 +7,7 @@ const controller = new PostController();
 
 route.get("/", controller.getAll.bind(controller));
 route.get("/:id", controller.getOne.bind(controller));
+route.get("/:id/users", controller.getOneWithUsers.bind(controller));
 route.post("/", adminMiddleware, controller.create.bind(controller));
 route.patch("/:id", adminMiddleware, controller.updateOne.bind(controller));
 route.delete("/:id", adminMiddleware, controller.deleteOne.bind(controller));

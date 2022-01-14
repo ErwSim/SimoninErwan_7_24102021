@@ -48,13 +48,7 @@ export class PostController {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      const filter = req.filter;
-      // Used when querying own post
-      if (+req.params.userId) {
-        filter.where.userId = +req.params.userId;
-      }
-
-      const posts = await this.prisma.post.findMany(filter);
+      const posts = await this.prisma.post.findMany();
 
       return res.status(200).json(posts);
     } catch (e) {
@@ -75,14 +69,37 @@ export class PostController {
   ): Promise<express.Response> {
     try {
       const id = +req.params.id;
-      const filter = req.filter;
-      filter.where = {};
-      filter.where.id = id;
-      // Used when querying own post
-      if (+req.params.userId) {
-        filter.where.userId = +req.params.userId;
+      const post = await this.prisma.post.findUnique({ where: { id } });
+
+      if (!post) {
+        return res.status(404).json({ error: "postNotFound" });
       }
-      const post = await this.prisma.post.findUnique(filter);
+
+      return res.status(200).json(post);
+    } catch (e) {
+      const error = new ErrorHandlingHelper(e).prisma();
+      return res.status(error.statusCode).json({ error: error.error });
+    }
+  }
+
+  /**
+   * Get one post filtered by id
+   * @param req - Express request
+   * @param res - Express response
+   * @returns The requested post as express Response
+   */
+  async getOneWithUsers(
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> {
+    try {
+      const id = +req.params.id;
+      const post = await this.prisma.post.findUnique({
+        where: { id },
+        include: {
+          messages: { include: { User: true }, orderBy: { createdAt: "desc" } },
+        },
+      });
 
       if (!post) {
         return res.status(404).json({ error: "postNotFound" });

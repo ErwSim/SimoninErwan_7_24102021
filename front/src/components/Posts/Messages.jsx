@@ -15,10 +15,7 @@ export default function Messages(props) {
   }, [post]);
 
   const fetchPosts = async () => {
-    const posts = await postService.getOneById(
-      post.id,
-      `?filter[include][messages][include][User]=true&filter[include][messages][orderBy][createdAt]=desc`
-    );
+    const posts = await postService.getOneByIdWithUsers(post.id);
 
     setPosts(
       posts.messages.map((post) => {

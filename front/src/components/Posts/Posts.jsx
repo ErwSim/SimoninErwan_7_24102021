@@ -31,10 +31,7 @@ export default function Posts() {
   };
 
   const fetchCategory = async () => {
-    const cat = await categoryService.getOneById(
-      categoryId,
-      "?filter[include][Posts][include][User]=true&filter[include][Posts][orderBy][createdAt]=desc"
-    );
+    const cat = await categoryService.getOneByIdWithUsers(categoryId);
 
     setCategory(cat);
     setPosts(
