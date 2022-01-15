@@ -48,20 +48,6 @@ All those three commands can be run in once with `npm run dbInit`
 You can start the development server by running `npm run dev`
 It will compil to dist folder then watch every change you make to the code and start the server
 
-### API Specifications
-
-#### Filter
-
-When you want to filter on a model, you have to use queryParams.
-To simplify queryParams translation, your frontend can use URLSearchParams to encode your json.
-The json should be like
-
-    {
-        "filter": <theFilter>
-    }
-
-`<theFilter>` shall be readable by Prisma SelectSubset.
-
 ## Production
 
 ### Migrate database
